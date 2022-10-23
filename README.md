@@ -1,6 +1,8 @@
 # Morse Keyer
 Morse Keyer is a tool created by BD4VQK (Helloworld), to translate text into morse code, with playback function.
 
+Download: https://github.com/LYZhelloworld/MorseKeyer/releases/latest/
+
 ## Features
 - Adjusting speed (WPM), tone (frequency), and volume (gain) of the signal.
 - Editable message template with callsigns.
