@@ -26,12 +26,7 @@ namespace MorseCoder.SignalGenerator.FunctionalTest
         public void TestSampleMessages(string message)
         {
             using var signalWaveOutEvent = new WaveOutEvent();
-            signalWaveOutEvent.Init(new MorseGenerator(message, new()
-            {
-                Wpm = 20,
-                Frequency = 700,
-                Gain = 0.5,
-            }));
+            signalWaveOutEvent.Init(new MorseGenerator(message, new()));
 
             signalWaveOutEvent.Play();
             Task.Run(() =>
@@ -40,6 +35,8 @@ namespace MorseCoder.SignalGenerator.FunctionalTest
                 {
                 }
             }).Wait();
+
+            Thread.Sleep(500);
         }
     }
 }

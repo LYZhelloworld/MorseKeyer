@@ -23,6 +23,16 @@ namespace MorseCoder.SignalGenerator
         /// Initializes a new instance of the <see cref="MorseGenerator"/> class.
         /// </summary>
         /// <param name="message">The message to send.</param>
+        /// <exception cref="InvalidCharacterException">Thrown when message contains invalid characters.</exception>
+        public MorseGenerator(string message)
+            : this(message, new MorseGeneratorConfig())
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MorseGenerator"/> class.
+        /// </summary>
+        /// <param name="message">The message to send.</param>
         /// <param name="config">The config of the generator.</param>
         /// <exception cref="InvalidCharacterException">Thrown when message contains invalid characters.</exception>
         public MorseGenerator(string message, MorseGeneratorConfig config)
@@ -60,8 +70,10 @@ namespace MorseCoder.SignalGenerator
                                 Frequency = config.Frequency,
                                 Type = SignalGeneratorType.Sin,
                             }.Take(TimeSpan.FromMilliseconds(3 * unitTime)),
-                            _ => throw new InvalidOperationException("The code contains invalid characters."), // should not happen
+                            _ => null, // This should not happen.
                         })
+                        .Where(x => x != null)
+                        .Select(x => x!)
                         .Aggregate((a, b) => a.FollowedBy(TimeSpan.FromMilliseconds(unitTime), b)))
                     .Aggregate((a, b) => a.FollowedBy(TimeSpan.FromMilliseconds(3 * unitTime), b)))
                 .Aggregate((a, b) => a.FollowedBy(TimeSpan.FromMilliseconds(7 * unitTime), b));

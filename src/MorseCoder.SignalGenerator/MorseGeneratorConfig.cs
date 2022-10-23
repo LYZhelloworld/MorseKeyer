@@ -13,16 +13,16 @@ namespace MorseCoder.SignalGenerator
         /// <summary>
         /// Gets or sets the gain of signal.
         /// </summary>
-        public double Gain { get; set; }
+        public double Gain { get; set; } = 0.5;
 
         /// <summary>
         /// Gets or sets the frequency.
         /// </summary>
-        public int Frequency { get; set; }
+        public int Frequency { get; set; } = 700;
 
         /// <summary>
         /// Gets or sets the number of words per minute.
         /// </summary>
-        public int Wpm { get; set; }
+        public int Wpm { get; set; } = 30;
     }
 }
