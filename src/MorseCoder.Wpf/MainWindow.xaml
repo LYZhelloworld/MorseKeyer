@@ -10,7 +10,7 @@
     <DockPanel Margin="5">
         <StackPanel DockPanel.Dock="Top">
             <Label Content="Message" Target="{Binding ElementName=MessageTextBox}"/>
-            <TextBox x:Name="MessageTextBox" d:Text="CQ CQ CQ" DataContext="{Binding Path=Message}"/>
+            <TextBox x:Name="MessageTextBox" d:Text="CQ CQ CQ" Text="{Binding Path=Message, UpdateSourceTrigger=PropertyChanged}" KeyDown="MessageTextBox_KeyDown"/>
         </StackPanel>
         <GroupBox Header="Templates" Margin="0,2,0,0">
             <Grid>
@@ -30,14 +30,14 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Row="0" Grid.Column="0" Content="CQ" Margin="0,0,5,5"/>
-                        <Button Grid.Row="0" Grid.Column="1" Content="QRZ?" Margin="0,0,5,5"/>
-                        <Button Grid.Row="0" Grid.Column="2" Content="TU" Margin="0,0,5,5"/>
-                        <Button Grid.Row="0" Grid.Column="3" Content="&lt;my&gt;" Margin="0,0,5,5"/>
-                        <Button Grid.Row="1" Grid.Column="0" Content="&lt;their&gt;" Margin="0,0,5,0"/>
-                        <Button Grid.Row="1" Grid.Column="1" Content="73" Margin="0,0,5,0"/>
-                        <Button Grid.Row="1" Grid.Column="2" Content="?" Margin="0,0,5,0"/>
-                        <Button Grid.Row="1" Grid.Column="3" Content="NIL" Margin="0,0,5,0"/>
+                        <Button x:Name="CQTemplateButton" Grid.Row="0" Grid.Column="0" Content="CQ" Margin="0,0,5,5" Click="CQTemplateButton_Click"/>
+                        <Button x:Name="QRZTemplateButton" Grid.Row="0" Grid.Column="1" Content="QRZ?" Margin="0,0,5,5" Click="QRZTemplateButton_Click"/>
+                        <Button x:Name="RstTemplateButton" Grid.Row="0" Grid.Column="2" Content="RST" Margin="0,0,5,5" Click="RstTemplateButton_Click"/>
+                        <Button x:Name="MyCallsignTemplateButton" Grid.Row="0" Grid.Column="3" Content="&lt;my&gt;" Margin="0,0,5,5" Click="MyCallsignTemplateButton_Click"/>
+                        <Button x:Name="TheirCallsignTemplateButton" Grid.Row="1" Grid.Column="0" Content="&lt;their&gt;" Margin="0,0,5,0" Click="TheirCallsignTemplateButton_Click"/>
+                        <Button x:Name="SeventyThreeTemplateButton" Grid.Row="1" Grid.Column="1" Content="73" Margin="0,0,5,0" Click="SeventyThreeTemplateButton_Click"/>
+                        <Button x:Name="SayAgainTemplateButton" Grid.Row="1" Grid.Column="2" Content="?" Margin="0,0,5,0" Click="SayAgainTemplateButton_Click"/>
+                        <Button x:Name="NILTemplateButton" Grid.Row="1" Grid.Column="3" Content="NIL" Margin="0,0,5,0" Click="NILTemplateButton_Click"/>
                     </Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -46,7 +46,7 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Margin="0,0,5,0">
                             <Label Content="Prosigns" Target="{Binding ElementName=ProsignComboBox}"/>
-                            <ComboBox x:Name="ProsignComboBox" ItemsSource="{Binding Path=Prosigns}">
+                            <ComboBox x:Name="ProsignComboBox" ItemsSource="{Binding Path=Prosigns}" SelectionChanged="ComboBox_SelectionChanged">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
@@ -60,7 +60,7 @@
                         </StackPanel>
                         <StackPanel Grid.Column="1">
                             <Label Content="Q-codes" Target="{Binding ElementName=QCodeComboBox}"/>
-                            <ComboBox x:Name="QCodeComboBox" ItemsSource="{Binding Path=QCodes}">
+                            <ComboBox x:Name="QCodeComboBox" ItemsSource="{Binding Path=QCodes}" SelectionChanged="ComboBox_SelectionChanged">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
@@ -75,10 +75,10 @@
                     </Grid>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
-                    <Label Content="Your callsign" Target="{Binding ElementName=YourCallsignTextBox}"/>
-                    <TextBox x:Name="YourCallsignTextBox" d:Text="BA1ZZZ" DataContext="{Binding Path=YourCallsign}"/>
+                    <Label Content="My callsign" Target="{Binding ElementName=MyCallsignTextBox}"/>
+                    <TextBox x:Name="MyCallsignTextBox" d:Text="BA1ZZZ" Text="{Binding Path=MyCallsign, UpdateSourceTrigger=PropertyChanged}"/>
                     <Label Content="Their callsign" Target="{Binding ElementName=TheirCallsignTextBox}"/>
-                    <TextBox x:Name="TheirCallsignTextBox" d:Text="BA1YYY" DataContext="{Binding Path=TheirCallsign}"/>
+                    <TextBox x:Name="TheirCallsignTextBox" d:Text="BA1YYY" Text="{Binding Path=TheirCallsign, UpdateSourceTrigger=PropertyChanged}"/>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>

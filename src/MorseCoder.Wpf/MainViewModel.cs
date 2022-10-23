@@ -16,7 +16,6 @@ namespace MorseCoder.Wpf
     /// </summary>
     internal class MainViewModel : INotifyPropertyChanged
     {
-        /// <inheritdoc cref="Prosigns"/>
         private static readonly IEnumerable<ItemWithDescription> ProsignsValue = new List<ItemWithDescription>
         {
             new("R", "Roger"),
@@ -54,21 +53,11 @@ namespace MorseCoder.Wpf
             new("QTH", "Location"),
         };
 
-        /// <inheritdoc cref="Message"/>
         private string message = string.Empty;
-
-        /// <inheritdoc cref="YourCallsign"/>
-        private string yourCallsign = string.Empty;
-
-        /// <inheritdoc cref="TheirCallsign"/>
+        private string myCallsign = string.Empty;
         private string theirCallsign = string.Empty;
-
-        /// <inheritdoc cref="Gain"/>
         private double gain = 0.5;
-
-        /// <inheritdoc cref="Frequency"/>
         private int frequency = 700;
-
         private int wpm = 25;
 
         /// <inheritdoc/>
@@ -90,16 +79,16 @@ namespace MorseCoder.Wpf
         public string Message
         {
             get => this.message;
-            set => this.SetProperty(ref this.message, value);
+            set => this.SetProperty(ref this.message, value.ToUpperInvariant());
         }
 
         /// <summary>
-        /// Gets or sets your callsign.
+        /// Gets or sets my callsign.
         /// </summary>
-        public string YourCallsign
+        public string MyCallsign
         {
-            get => this.yourCallsign;
-            set => this.SetProperty(ref this.yourCallsign, value);
+            get => this.myCallsign;
+            set => this.SetProperty(ref this.myCallsign, value.ToUpperInvariant());
         }
 
         /// <summary>
@@ -108,7 +97,7 @@ namespace MorseCoder.Wpf
         public string TheirCallsign
         {
             get => this.theirCallsign;
-            set => this.SetProperty(ref this.theirCallsign, value);
+            set => this.SetProperty(ref this.theirCallsign, value.ToUpperInvariant());
         }
 
         /// <summary>
