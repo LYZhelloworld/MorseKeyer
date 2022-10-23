@@ -132,34 +132,42 @@ namespace MorseKeyer.Wpf
 
             this.ViewModel.IsSending = true;
 
-            var provider = new MorseGenerator(message, new()
+            try
             {
-                Gain = this.ViewModel.Gain,
-                Frequency = this.ViewModel.Frequency,
-                Wpm = this.ViewModel.Wpm,
-            });
-
-            this.waveOutEvent?.Stop();
-            this.waveOutEvent = new();
-            this.waveOutEvent.Init(provider);
-            this.isCancelled = false;
-
-            this.waveOutEvent.PlaybackStopped += (sender, e) =>
-            {
-                this.Dispatcher.Invoke(() =>
+                var provider = new MorseGenerator(message, new()
                 {
-                    this.ViewModel.IsSending = false;
-
-                    if (!this.isCancelled)
-                    {
-                        this.ViewModel.Message = string.Empty;
-                    }
-
-                    this.MessageTextBox.Focus();
+                    Gain = this.ViewModel.Gain,
+                    Frequency = this.ViewModel.Frequency,
+                    Wpm = this.ViewModel.Wpm,
                 });
-            };
 
-            this.waveOutEvent.Play();
+                this.waveOutEvent?.Stop();
+                this.waveOutEvent = new();
+                this.waveOutEvent.Init(provider);
+                this.isCancelled = false;
+
+                this.waveOutEvent.PlaybackStopped += (sender, e) =>
+                {
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        this.ViewModel.IsSending = false;
+
+                        if (!this.isCancelled)
+                        {
+                            this.ViewModel.Message = string.Empty;
+                        }
+
+                        this.MessageTextBox.Focus();
+                    });
+                };
+
+                this.waveOutEvent.Play();
+            }
+            catch (InvalidCharacterException)
+            {
+                MessageBox.Show("Invalid character(s) are found in message.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                this.ViewModel.IsSending = false;
+            }
         }
 
         private void MessageTemplateButton_Click(object sender, RoutedEventArgs e)
