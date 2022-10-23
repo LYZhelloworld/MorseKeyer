@@ -3,7 +3,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 // </copyright>
 
-namespace MorseCoder.SignalGenerator
+namespace MorseKeyer.SignalGenerator
 {
     using System;
     using NAudio.Wave;
@@ -80,6 +80,7 @@ namespace MorseCoder.SignalGenerator
         }
 
         /// <inheritdoc/>
+        [CLSCompliant(false)]
         public WaveFormat WaveFormat => this.signalGenerator.WaveFormat;
 
         /// <inheritdoc/>

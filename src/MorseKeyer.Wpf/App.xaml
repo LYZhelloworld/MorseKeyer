@@ -1,7 +1,7 @@
-﻿<Application x:Class="MorseCoder.Wpf.App"
+﻿<Application x:Class="MorseKeyer.Wpf.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:MorseCoder.Wpf"
+             xmlns:local="clr-namespace:MorseKeyer.Wpf"
              Startup="ApplicationStartup">
     <Application.Resources>
          

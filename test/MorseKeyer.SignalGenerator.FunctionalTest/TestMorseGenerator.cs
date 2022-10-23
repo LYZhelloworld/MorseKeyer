@@ -3,9 +3,10 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 // </copyright>
 
-namespace MorseCoder.SignalGenerator.FunctionalTest
+namespace MorseKeyer.SignalGenerator.FunctionalTest
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using MorseKeyer.SignalGenerator;
     using NAudio.Wave;
 
     /// <summary>
