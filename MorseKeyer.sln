@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{11400C17-934
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{F0C82C60-2718-468A-B864-709D48A51FEA}"
 	ProjectSection(SolutionItems) = preProject
-		config\.editorconfig = config\.editorconfig
+		.editorconfig = .editorconfig
 		Directory.build.props = Directory.build.props
 		config\stylecop.json = config\stylecop.json
 	EndProjectSection
