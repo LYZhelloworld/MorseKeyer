@@ -26,7 +26,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseKeyer.SignalGenerator.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseKeyer.SignalGenerator", "src\MorseKeyer.SignalGenerator\MorseKeyer.SignalGenerator.csproj", "{166DAE8A-985E-43E7-9232-B24E012C2DD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorseKeyer.SignalGenerator.Test", "test\MorseKeyer.SignalGenerator.Test\MorseKeyer.SignalGenerator.Test.csproj", "{9BB4EB1E-B6D8-4B47-9675-5681BEDEE2B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseKeyer.SignalGenerator.Test", "test\MorseKeyer.SignalGenerator.Test\MorseKeyer.SignalGenerator.Test.csproj", "{9BB4EB1E-B6D8-4B47-9675-5681BEDEE2B4}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MorseKeyer.MsiPackage", "src\MorseKeyer.MsiPackage\MorseKeyer.MsiPackage.vdproj", "{FF07304A-077D-4E42-974E-BC167D597EEF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "setup", "setup", "{AAD6B125-6BFF-48FE-8483-CA25D2E45467}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +54,8 @@ Global
 		{9BB4EB1E-B6D8-4B47-9675-5681BEDEE2B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BB4EB1E-B6D8-4B47-9675-5681BEDEE2B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BB4EB1E-B6D8-4B47-9675-5681BEDEE2B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF07304A-077D-4E42-974E-BC167D597EEF}.Debug|Any CPU.ActiveCfg = Debug
+		{FF07304A-077D-4E42-974E-BC167D597EEF}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{51F13B9A-DCE1-47D9-A362-A9E5261EEDBA} = {6D585E8C-EF0A-4256-96B2-6084636129EA}
 		{166DAE8A-985E-43E7-9232-B24E012C2DD5} = {11400C17-9341-4D5D-9799-1F52A43DA292}
 		{9BB4EB1E-B6D8-4B47-9675-5681BEDEE2B4} = {6D585E8C-EF0A-4256-96B2-6084636129EA}
+		{FF07304A-077D-4E42-974E-BC167D597EEF} = {AAD6B125-6BFF-48FE-8483-CA25D2E45467}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F9A3AF0-A6C6-48C6-B474-63CBF14CB2E4}
