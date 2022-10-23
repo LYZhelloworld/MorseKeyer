@@ -5,10 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MorseCoder.Wpf"
         mc:Ignorable="d"
-        Title="Morse Coder" Height="180" Width="600">
-    <StackPanel Grid.Row="0" Grid.Column="0" Margin="5">
-        <Label Content="Message" Target="{Binding ElementName=MessageTextBox}"/>
-        <TextBox x:Name="MessageTextBox" d:Text="CQ CQ CQ"/>
+        Title="Morse Coder" Height="250" Width="600"
+        d:DataContext="{d:DesignInstance Type=local:MainViewModel}">
+    <DockPanel Margin="5">
+        <StackPanel DockPanel.Dock="Top">
+            <Label Content="Message" Target="{Binding ElementName=MessageTextBox}"/>
+            <TextBox x:Name="MessageTextBox" d:Text="CQ CQ CQ" DataContext="{Binding Path=Message}"/>
+        </StackPanel>
         <GroupBox Header="Templates" Margin="0,2,0,0">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -43,21 +46,58 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Margin="0,0,5,0">
                             <Label Content="Prosigns" Target="{Binding ElementName=ProsignComboBox}"/>
-                            <ComboBox x:Name="ProsignComboBox"/>
+                            <ComboBox x:Name="ProsignComboBox" ItemsSource="{Binding Path=Prosigns}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Path=Value}"/>
+                                            <TextBlock Text=" - "/>
+                                            <TextBlock Text="{Binding Path=Description}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ComboBox>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
                             <Label Content="Q-codes" Target="{Binding ElementName=QCodeComboBox}"/>
-                            <ComboBox x:Name="QCodeComboBox"/>
+                            <ComboBox x:Name="QCodeComboBox" ItemsSource="{Binding Path=QCodes}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Path=Value}"/>
+                                            <TextBlock Text=" - "/>
+                                            <TextBlock Text="{Binding Path=Description}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ComboBox>
                         </StackPanel>
                     </Grid>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
                     <Label Content="Your callsign" Target="{Binding ElementName=YourCallsignTextBox}"/>
-                    <TextBox x:Name="YourCallsignTextBox" d:Text="BA1ZZZ"/>
+                    <TextBox x:Name="YourCallsignTextBox" d:Text="BA1ZZZ" DataContext="{Binding Path=YourCallsign}"/>
                     <Label Content="Their callsign" Target="{Binding ElementName=TheirCallsignTextBox}"/>
-                    <TextBox x:Name="TheirCallsignTextBox" d:Text="BA1YYY"/>
+                    <TextBox x:Name="TheirCallsignTextBox" d:Text="BA1YYY" DataContext="{Binding Path=TheirCallsign}"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="Gain" Target="{Binding ElementName=SignalGainTextBox}"/>
+                        <TextBox x:Name="SignalGainTextBox" Grid.Row="1" Grid.Column="0" Margin="0,0,6,0" d:Text="0.5" Text="{Binding Path=Gain}"/>
+                        <Label Grid.Row="0" Grid.Column="1" Content="Freq (Hz)" Target="{Binding ElementName=SignalFrequencyTextBox}"/>
+                        <TextBox x:Name="SignalFrequencyTextBox" Grid.Row="1" Grid.Column="1" d:Text="700" Text="{Binding Path=Frequency}"/>
+                        <Label Grid.Row="0" Grid.Column="2" Content="WPM" Target="{Binding ElementName=WpmTextBox}"/>
+                        <TextBox x:Name="WpmTextBox" Grid.Row="1" Grid.Column="2" Margin="5,0,0,0" d:Text="25" Text="{Binding Path=WPM}"/>
+                    </Grid>
                 </StackPanel>
             </Grid>
         </GroupBox>
-    </StackPanel>
+    </DockPanel>
 </Window>
