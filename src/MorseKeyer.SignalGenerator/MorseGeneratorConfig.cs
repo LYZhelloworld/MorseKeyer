@@ -5,9 +5,12 @@
 
 namespace MorseKeyer.SignalGenerator
 {
+    using System.Diagnostics.CodeAnalysis;
+
     /// <summary>
     /// The config when creating <see cref="MorseGenerator"/>.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public record MorseGeneratorConfig
     {
         /// <summary>

@@ -26,6 +26,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseKeyer.SignalGenerator.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseKeyer.SignalGenerator", "src\MorseKeyer.SignalGenerator\MorseKeyer.SignalGenerator.csproj", "{166DAE8A-985E-43E7-9232-B24E012C2DD5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorseKeyer.SignalGenerator.Test", "test\MorseKeyer.SignalGenerator.Test\MorseKeyer.SignalGenerator.Test.csproj", "{9BB4EB1E-B6D8-4B47-9675-5681BEDEE2B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{166DAE8A-985E-43E7-9232-B24E012C2DD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{166DAE8A-985E-43E7-9232-B24E012C2DD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{166DAE8A-985E-43E7-9232-B24E012C2DD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BB4EB1E-B6D8-4B47-9675-5681BEDEE2B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BB4EB1E-B6D8-4B47-9675-5681BEDEE2B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BB4EB1E-B6D8-4B47-9675-5681BEDEE2B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BB4EB1E-B6D8-4B47-9675-5681BEDEE2B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{4CE445E4-8028-4A33-911C-B44E53CC70D0} = {11400C17-9341-4D5D-9799-1F52A43DA292}
 		{51F13B9A-DCE1-47D9-A362-A9E5261EEDBA} = {6D585E8C-EF0A-4256-96B2-6084636129EA}
 		{166DAE8A-985E-43E7-9232-B24E012C2DD5} = {11400C17-9341-4D5D-9799-1F52A43DA292}
+		{9BB4EB1E-B6D8-4B47-9675-5681BEDEE2B4} = {6D585E8C-EF0A-4256-96B2-6084636129EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F9A3AF0-A6C6-48C6-B474-63CBF14CB2E4}

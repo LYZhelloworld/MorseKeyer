@@ -6,12 +6,14 @@
 namespace MorseKeyer.SignalGenerator
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using NAudio.Wave;
     using NAudio.Wave.SampleProviders;
 
     /// <summary>
     /// The signal generator of Morse code.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class MorseGenerator : ISampleProvider
     {
         /// <summary>
