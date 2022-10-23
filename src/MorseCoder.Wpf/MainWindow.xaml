@@ -5,8 +5,59 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MorseCoder.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        Title="Morse Coder" Height="180" Width="600">
+    <StackPanel Grid.Row="0" Grid.Column="0" Margin="5">
+        <Label Content="Message" Target="{Binding ElementName=MessageTextBox}"/>
+        <TextBox x:Name="MessageTextBox" d:Text="CQ CQ CQ"/>
+        <GroupBox Header="Templates" Margin="0,2,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Row="0" Grid.Column="0" Content="CQ" Margin="0,0,5,5"/>
+                        <Button Grid.Row="0" Grid.Column="1" Content="QRZ?" Margin="0,0,5,5"/>
+                        <Button Grid.Row="0" Grid.Column="2" Content="TU" Margin="0,0,5,5"/>
+                        <Button Grid.Row="0" Grid.Column="3" Content="&lt;my&gt;" Margin="0,0,5,5"/>
+                        <Button Grid.Row="1" Grid.Column="0" Content="&lt;their&gt;" Margin="0,0,5,0"/>
+                        <Button Grid.Row="1" Grid.Column="1" Content="73" Margin="0,0,5,0"/>
+                        <Button Grid.Row="1" Grid.Column="2" Content="?" Margin="0,0,5,0"/>
+                        <Button Grid.Row="1" Grid.Column="3" Content="NIL" Margin="0,0,5,0"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                            <Label Content="Prosigns" Target="{Binding ElementName=ProsignComboBox}"/>
+                            <ComboBox x:Name="ProsignComboBox"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <Label Content="Q-codes" Target="{Binding ElementName=QCodeComboBox}"/>
+                            <ComboBox x:Name="QCodeComboBox"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <Label Content="Your callsign" Target="{Binding ElementName=YourCallsignTextBox}"/>
+                    <TextBox x:Name="YourCallsignTextBox" d:Text="BA1ZZZ"/>
+                    <Label Content="Their callsign" Target="{Binding ElementName=TheirCallsignTextBox}"/>
+                    <TextBox x:Name="TheirCallsignTextBox" d:Text="BA1YYY"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </StackPanel>
 </Window>
