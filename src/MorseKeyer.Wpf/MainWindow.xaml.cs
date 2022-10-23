@@ -6,11 +6,11 @@
 namespace MorseKeyer.Wpf
 {
     using System;
-    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
     using MorseKeyer.SignalGenerator;
+    using MorseKeyer.Wpf.DataStructures;
     using NAudio.Wave;
 
     /// <summary>
@@ -19,9 +19,20 @@ namespace MorseKeyer.Wpf
     public partial class MainWindow : Window
     {
         /// <summary>
+        /// The command to stop playing.
+        /// </summary>
+        public static readonly ICommand StopPlayingCommand = new RoutedCommand();
+
+        /// <summary>
         /// The event for playing morse code.
         /// </summary>
         private WaveOutEvent? waveOutEvent;
+
+        /// <summary>
+        /// A value that indicates whether the playback event has been cancelled.
+        /// When cancelling the event, the message textbox will not be cleared.
+        /// </summary>
+        private bool isCancelled;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
@@ -131,22 +142,24 @@ namespace MorseKeyer.Wpf
             this.waveOutEvent?.Stop();
             this.waveOutEvent = new();
             this.waveOutEvent.Init(provider);
-            this.waveOutEvent.Play();
+            this.isCancelled = false;
 
-            Task.Run(() =>
+            this.waveOutEvent.PlaybackStopped += (sender, e) =>
             {
-                while (this.waveOutEvent.PlaybackState == PlaybackState.Playing)
-                {
-                }
-
                 this.Dispatcher.Invoke(() =>
                 {
                     this.ViewModel.IsSending = false;
 
-                    this.ViewModel.Message = string.Empty;
+                    if (!this.isCancelled)
+                    {
+                        this.ViewModel.Message = string.Empty;
+                    }
+
                     this.MessageTextBox.Focus();
                 });
-            });
+            };
+
+            this.waveOutEvent.Play();
         }
 
         private void MessageTemplateButton_Click(object sender, RoutedEventArgs e)
@@ -187,6 +200,17 @@ namespace MorseKeyer.Wpf
             {
                 this.SendMessage();
             }
+        }
+
+        private void StopPlayingCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.isCancelled = true;
+            this.waveOutEvent?.Stop();
+        }
+
+        private void StopPlayingCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = this.waveOutEvent != null;
         }
     }
 }

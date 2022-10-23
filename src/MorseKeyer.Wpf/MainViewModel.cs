@@ -11,6 +11,7 @@ namespace MorseKeyer.Wpf
     using System.Globalization;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using MorseKeyer.Wpf.DataStructures;
 
     /// <summary>
     /// The view model for <see cref="MainWindow"/>.

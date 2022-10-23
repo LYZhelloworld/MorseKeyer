@@ -3,7 +3,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 // </copyright>
 
-namespace MorseKeyer.Wpf
+namespace MorseKeyer.Wpf.DataStructures
 {
     /// <summary>
     /// Item for combo box with description.
