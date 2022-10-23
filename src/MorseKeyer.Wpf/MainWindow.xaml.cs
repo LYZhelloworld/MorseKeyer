@@ -6,15 +6,23 @@
 namespace MorseKeyer.Wpf
 {
     using System;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
+    using MorseKeyer.SignalGenerator;
+    using NAudio.Wave;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml.
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The event for playing morse code.
+        /// </summary>
+        private WaveOutEvent? waveOutEvent;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
         /// </summary>
@@ -23,6 +31,9 @@ namespace MorseKeyer.Wpf
             this.InitializeComponent();
         }
 
+        /// <summary>
+        /// Gets the data context.
+        /// </summary>
         private MainViewModel ViewModel => (MainViewModel)this.DataContext;
 
         /// <summary>
@@ -33,6 +44,11 @@ namespace MorseKeyer.Wpf
         /// <param name="requireTheirCallsign">A value that indicates whether "Their callsign" needs to be non-empty.</param>
         private void AppendMessage(string message, bool requireMyCallsign = false, bool requireTheirCallsign = false)
         {
+            if (this.ViewModel.IsSending)
+            {
+                return;
+            }
+
             if (requireMyCallsign && string.IsNullOrEmpty(this.ViewModel.MyCallsign))
             {
                 this.MyCallsignTextBox.Focus();
@@ -45,7 +61,7 @@ namespace MorseKeyer.Wpf
                 return;
             }
 
-            if (this.ViewModel.Message.EndsWith(" ", System.StringComparison.InvariantCulture))
+            if (this.ViewModel.Message.EndsWith(" ", StringComparison.InvariantCulture))
             {
                 this.ViewModel.Message += message;
             }
@@ -67,6 +83,11 @@ namespace MorseKeyer.Wpf
         /// <param name="requireTheirCallsign">A value that indicates whether "Their callsign" needs to be non-empty.</param>
         private void SetMessage(string message, bool requireMyCallsign = false, bool requireTheirCallsign = false)
         {
+            if (this.ViewModel.IsSending)
+            {
+                return;
+            }
+
             if (requireMyCallsign && string.IsNullOrEmpty(this.ViewModel.MyCallsign))
             {
                 this.MyCallsignTextBox.Focus();
@@ -85,6 +106,47 @@ namespace MorseKeyer.Wpf
             // Put caret at the end.
             this.MessageTextBox.SelectionStart = this.MessageTextBox.Text.Length;
             this.MessageTextBox.SelectionLength = 0;
+        }
+
+        /// <summary>
+        /// Sends the message.
+        /// </summary>
+        private void SendMessage()
+        {
+            var message = this.ViewModel.Message;
+            if (string.IsNullOrEmpty(message))
+            {
+                return;
+            }
+
+            this.ViewModel.IsSending = true;
+
+            var provider = new MorseGenerator(message, new()
+            {
+                Gain = this.ViewModel.Gain,
+                Frequency = this.ViewModel.Frequency,
+                Wpm = this.ViewModel.Wpm,
+            });
+
+            this.waveOutEvent?.Stop();
+            this.waveOutEvent = new();
+            this.waveOutEvent.Init(provider);
+            this.waveOutEvent.Play();
+
+            Task.Run(() =>
+            {
+                while (this.waveOutEvent.PlaybackState == PlaybackState.Playing)
+                {
+                }
+
+                this.Dispatcher.Invoke(() =>
+                {
+                    this.ViewModel.IsSending = false;
+
+                    this.ViewModel.Message = string.Empty;
+                    this.MessageTextBox.Focus();
+                });
+            });
         }
 
         private void MessageTemplateButton_Click(object sender, RoutedEventArgs e)
@@ -113,7 +175,6 @@ namespace MorseKeyer.Wpf
                 if (comboBox.SelectedItem is ItemWithDescription item)
                 {
                     this.AppendMessage(item.Value);
-                    this.MessageTextBox.Focus();
                 }
 
                 comboBox.SelectedIndex = -1;
@@ -124,9 +185,7 @@ namespace MorseKeyer.Wpf
         {
             if (e.Key == Key.Enter)
             {
-                MessageBox.Show(this.MessageTextBox.Text); // Debug
-                this.ViewModel.Message = string.Empty;
-                this.MessageTextBox.Focus();
+                this.SendMessage();
             }
         }
     }

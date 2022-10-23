@@ -10,7 +10,7 @@
     <DockPanel Margin="5">
         <StackPanel DockPanel.Dock="Top">
             <Label Content="Message" Target="{Binding ElementName=MessageTextBox}"/>
-            <TextBox x:Name="MessageTextBox" d:Text="CQ CQ CQ" Text="{Binding Path=Message, UpdateSourceTrigger=PropertyChanged}" KeyDown="MessageTextBox_KeyDown"/>
+            <TextBox x:Name="MessageTextBox" d:Text="CQ CQ CQ" Text="{Binding Path=Message, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Path=IsMessageControlsEnabled}" KeyDown="MessageTextBox_KeyDown"/>
         </StackPanel>
         <GroupBox Header="Templates" Margin="0,2,0,0">
             <Grid>
@@ -94,7 +94,7 @@
                         <Label Grid.Row="0" Grid.Column="1" Content="Freq (Hz)" Target="{Binding ElementName=SignalFrequencyTextBox}"/>
                         <TextBox x:Name="SignalFrequencyTextBox" Grid.Row="1" Grid.Column="1" d:Text="700" Text="{Binding Path=Frequency}"/>
                         <Label Grid.Row="0" Grid.Column="2" Content="WPM" Target="{Binding ElementName=WpmTextBox}"/>
-                        <TextBox x:Name="WpmTextBox" Grid.Row="1" Grid.Column="2" Margin="5,0,0,0" d:Text="25" Text="{Binding Path=WPM}"/>
+                        <TextBox x:Name="WpmTextBox" Grid.Row="1" Grid.Column="2" Margin="5,0,0,0" d:Text="25" Text="{Binding Path=Wpm}"/>
                     </Grid>
                 </StackPanel>
             </Grid>

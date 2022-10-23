@@ -70,12 +70,13 @@ namespace MorseKeyer.Wpf
         };
 
         private string message = string.Empty;
-        private ObservableCollection<MessageTemplate> messageTemplates = new ObservableCollection<MessageTemplate>(DefaultMessageTemplates);
+        private ObservableCollection<MessageTemplate> messageTemplates = new(DefaultMessageTemplates);
         private string myCallsign = string.Empty;
         private string theirCallsign = string.Empty;
         private double gain = 0.5;
         private int frequency = 700;
         private int wpm = 25;
+        private bool isSending;
 
         /// <inheritdoc/>
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -129,16 +130,25 @@ namespace MorseKeyer.Wpf
         /// <summary>
         /// Gets or sets the gain of the signal.
         /// </summary>
-        public string Gain
+        public double Gain
         {
-            get => this.gain.ToString(CultureInfo.InvariantCulture);
+            get => this.gain;
+            set => this.SetProperty(ref this.gain, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the text of the gain of the signal.
+        /// </summary>
+        public string GainText
+        {
+            get => this.Gain.ToString(CultureInfo.InvariantCulture);
             set
             {
                 if (double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var gain)
                     && gain >= 0
                     && gain <= 1)
                 {
-                    this.SetProperty(ref this.gain, gain);
+                    this.Gain = gain;
                 }
             }
         }
@@ -146,7 +156,16 @@ namespace MorseKeyer.Wpf
         /// <summary>
         /// Gets or sets the frequency of the signal.
         /// </summary>
-        public string Frequency
+        public int Frequency
+        {
+            get => this.frequency;
+            set => this.SetProperty(ref this.frequency, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the frequency text of the signal.
+        /// </summary>
+        public string FrequencyText
         {
             get => this.frequency.ToString(CultureInfo.InvariantCulture);
             set
@@ -155,7 +174,7 @@ namespace MorseKeyer.Wpf
                     && frequency >= 300
                     && frequency <= 900)
                 {
-                    this.SetProperty(ref this.frequency, frequency);
+                    this.Frequency = frequency;
                 }
             }
         }
@@ -163,7 +182,16 @@ namespace MorseKeyer.Wpf
         /// <summary>
         /// Gets or sets the words-per-minute value.
         /// </summary>
-        public string WPM
+        public int Wpm
+        {
+            get => this.wpm;
+            set => this.SetProperty(ref this.wpm, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the words-per-minute text.
+        /// </summary>
+        public string WpmText
         {
             get => this.wpm.ToString(CultureInfo.InvariantCulture);
             set
@@ -172,9 +200,30 @@ namespace MorseKeyer.Wpf
                     && wpm >= 5
                     && wpm <= 50)
                 {
-                    this.SetProperty(ref this.wpm, wpm);
+                    this.Wpm = wpm;
                 }
             }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether there is a message being sent currently.
+        /// </summary>
+        public bool IsSending
+        {
+            get => this.isSending;
+            set
+            {
+                this.SetProperty(ref this.isSending, value);
+                this.PropertyChanged?.Invoke(this, new(nameof(this.IsMessageControlsEnabled)));
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the controls related to message is enabled.
+        /// </summary>
+        public bool IsMessageControlsEnabled
+        {
+            get => !this.isSending;
         }
 
         /// <summary>

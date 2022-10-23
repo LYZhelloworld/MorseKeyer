@@ -14,4 +14,12 @@
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="NAudio" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MorseKeyer.SignalGenerator\MorseKeyer.SignalGenerator.csproj" />
+  </ItemGroup>
+
 </Project>
