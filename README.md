@@ -9,4 +9,4 @@ Download: https://github.com/LYZhelloworld/MorseKeyer/releases/latest/
 
 ## Libraries Used
 - [NAudio](https://github.com/naudio/NAudio) 2.1.0: for producing wave signal.
-- [VocaDb.ResXFileCodeGenerator](https://github.com/VocaDB/ResXFileCodeGenerator) 3.2.0: for i18n.
+- [VocaDb.ResXFileCodeGenerator](https://github.com/VocaDB/ResXFileCodeGenerator) 3.2.0: for generating i18n resource files.
