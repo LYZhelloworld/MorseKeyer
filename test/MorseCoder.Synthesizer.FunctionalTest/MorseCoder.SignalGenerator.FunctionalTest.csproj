@@ -17,7 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(SolutionDir)src\MorseCoder.Synthesizer\MorseCoder.Synthesizer.csproj" />
+    <ProjectReference Include="$(SolutionDir)src\MorseCoder.SignalGenerator\MorseCoder.SignalGenerator.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NAudio" Version="2.1.0" />
   </ItemGroup>
 
 </Project>
