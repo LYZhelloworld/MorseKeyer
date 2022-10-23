@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{11400C17-9341-4D5D-9799-1F52A43DA292}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{F0C82C60-2718-468A-B864-709D48A51FEA}"
+	ProjectSection(SolutionItems) = preProject
+		config\.editorconfig = config\.editorconfig
+		Directory.build.props = Directory.build.props
+		config\stylecop.json = config\stylecop.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{F0CBEA34-014C-42D1-8BA6-FC6E4D823A52}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseCoder.Wpf", "src\MorseCoder.Wpf\MorseCoder.Wpf.csproj", "{4CE445E4-8028-4A33-911C-B44E53CC70D0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseCoder.Synthesizer", "src\MorseCoder.Synthesizer\MorseCoder.Synthesizer.csproj", "{1F43B442-0F97-4EEE-96E8-2CBC3EB3ED54}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{6D585E8C-EF0A-4256-96B2-6084636129EA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseCoder.Synthesizer.FunctionalTest", "test\MorseCoder.Synthesizer.FunctionalTest\MorseCoder.Synthesizer.FunctionalTest.csproj", "{51F13B9A-DCE1-47D9-A362-A9E5261EEDBA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4CE445E4-8028-4A33-911C-B44E53CC70D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CE445E4-8028-4A33-911C-B44E53CC70D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CE445E4-8028-4A33-911C-B44E53CC70D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CE445E4-8028-4A33-911C-B44E53CC70D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F43B442-0F97-4EEE-96E8-2CBC3EB3ED54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F43B442-0F97-4EEE-96E8-2CBC3EB3ED54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F43B442-0F97-4EEE-96E8-2CBC3EB3ED54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F43B442-0F97-4EEE-96E8-2CBC3EB3ED54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51F13B9A-DCE1-47D9-A362-A9E5261EEDBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51F13B9A-DCE1-47D9-A362-A9E5261EEDBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51F13B9A-DCE1-47D9-A362-A9E5261EEDBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51F13B9A-DCE1-47D9-A362-A9E5261EEDBA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4CE445E4-8028-4A33-911C-B44E53CC70D0} = {11400C17-9341-4D5D-9799-1F52A43DA292}
+		{1F43B442-0F97-4EEE-96E8-2CBC3EB3ED54} = {11400C17-9341-4D5D-9799-1F52A43DA292}
+		{51F13B9A-DCE1-47D9-A362-A9E5261EEDBA} = {6D585E8C-EF0A-4256-96B2-6084636129EA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F9A3AF0-A6C6-48C6-B474-63CBF14CB2E4}
+	EndGlobalSection
+EndGlobal
