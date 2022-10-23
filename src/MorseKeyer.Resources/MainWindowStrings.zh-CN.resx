@@ -118,31 +118,31 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="GroupBoxTemplates" xml:space="preserve">
-    <value>Templates</value>
+    <value>预存消息</value>
   </data>
   <data name="InvalidCharacterError" xml:space="preserve">
-    <value>Invalid character(s) are found in message.</value>
+    <value>消息中含有无法解析的字符。</value>
   </data>
   <data name="LabelFrequency" xml:space="preserve">
-    <value>Freq (Hz)</value>
+    <value>频率（Hz）</value>
   </data>
   <data name="LabelGain" xml:space="preserve">
-    <value>Gain</value>
+    <value>增益</value>
   </data>
   <data name="LabelMessage" xml:space="preserve">
-    <value>Message (Press Enter key to send. Press Esc to cancel sending.)</value>
+    <value>消息（按回车发送，按 Esc 中止发送）</value>
   </data>
   <data name="LabelMyCallsign" xml:space="preserve">
-    <value>My callsign</value>
+    <value>我的呼号</value>
   </data>
   <data name="LabelProsigns" xml:space="preserve">
-    <value>Prosigns</value>
+    <value>简语</value>
   </data>
   <data name="LabelQCodes" xml:space="preserve">
-    <value>Q-codes</value>
+    <value>Q简语</value>
   </data>
   <data name="LabelTheirCallsign" xml:space="preserve">
-    <value>Their callsign</value>
+    <value>对方呼号</value>
   </data>
   <data name="LabelWpm" xml:space="preserve">
     <value>WPM</value>

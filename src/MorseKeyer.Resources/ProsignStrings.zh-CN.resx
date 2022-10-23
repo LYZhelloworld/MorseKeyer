@@ -117,37 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GroupBoxTemplates" xml:space="preserve">
-    <value>Templates</value>
+  <data name="AR" xml:space="preserve">
+    <value>换行</value>
   </data>
-  <data name="InvalidCharacterError" xml:space="preserve">
-    <value>Invalid character(s) are found in message.</value>
+  <data name="AS" xml:space="preserve">
+    <value>等待</value>
   </data>
-  <data name="LabelFrequency" xml:space="preserve">
-    <value>Freq (Hz)</value>
+  <data name="BK" xml:space="preserve">
+    <value>插入</value>
   </data>
-  <data name="LabelGain" xml:space="preserve">
-    <value>Gain</value>
+  <data name="BT" xml:space="preserve">
+    <value>新段落</value>
   </data>
-  <data name="LabelMessage" xml:space="preserve">
-    <value>Message (Press Enter key to send. Press Esc to cancel sending.)</value>
+  <data name="HH" xml:space="preserve">
+    <value>更正</value>
   </data>
-  <data name="LabelMyCallsign" xml:space="preserve">
-    <value>My callsign</value>
+  <data name="K" xml:space="preserve">
+    <value>请回复</value>
   </data>
-  <data name="LabelProsigns" xml:space="preserve">
-    <value>Prosigns</value>
+  <data name="KA" xml:space="preserve">
+    <value>开始传输</value>
   </data>
-  <data name="LabelQCodes" xml:space="preserve">
-    <value>Q-codes</value>
+  <data name="KN" xml:space="preserve">
+    <value>请讲</value>
   </data>
-  <data name="LabelTheirCallsign" xml:space="preserve">
-    <value>Their callsign</value>
+  <data name="QuestionMark" xml:space="preserve">
+    <value>请重复</value>
   </data>
-  <data name="LabelWpm" xml:space="preserve">
-    <value>WPM</value>
+  <data name="R" xml:space="preserve">
+    <value>收到</value>
   </data>
-  <data name="WindowTitle" xml:space="preserve">
-    <value>Morse Keyer</value>
+  <data name="SeventyThree" xml:space="preserve">
+    <value>祝好</value>
+  </data>
+  <data name="SK" xml:space="preserve">
+    <value>完毕</value>
+  </data>
+  <data name="SOS" xml:space="preserve">
+    <value>求救信号</value>
+  </data>
+  <data name="VE" xml:space="preserve">
+    <value>证实</value>
   </data>
 </root>

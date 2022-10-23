@@ -117,37 +117,49 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GroupBoxTemplates" xml:space="preserve">
-    <value>Templates</value>
+  <data name="QRA" xml:space="preserve">
+    <value>电台名称</value>
   </data>
-  <data name="InvalidCharacterError" xml:space="preserve">
-    <value>Invalid character(s) are found in message.</value>
+  <data name="QRL" xml:space="preserve">
+    <value>忙碌</value>
   </data>
-  <data name="LabelFrequency" xml:space="preserve">
-    <value>Freq (Hz)</value>
+  <data name="QRM" xml:space="preserve">
+    <value>他台干扰</value>
   </data>
-  <data name="LabelGain" xml:space="preserve">
-    <value>Gain</value>
+  <data name="QRN" xml:space="preserve">
+    <value>天电干扰</value>
   </data>
-  <data name="LabelMessage" xml:space="preserve">
-    <value>Message (Press Enter key to send. Press Esc to cancel sending.)</value>
+  <data name="QRP" xml:space="preserve">
+    <value>低功率</value>
   </data>
-  <data name="LabelMyCallsign" xml:space="preserve">
-    <value>My callsign</value>
+  <data name="QRS" xml:space="preserve">
+    <value>慢速拍发</value>
   </data>
-  <data name="LabelProsigns" xml:space="preserve">
-    <value>Prosigns</value>
+  <data name="QRT" xml:space="preserve">
+    <value>停止拍发</value>
   </data>
-  <data name="LabelQCodes" xml:space="preserve">
-    <value>Q-codes</value>
+  <data name="QRU" xml:space="preserve">
+    <value>无事</value>
   </data>
-  <data name="LabelTheirCallsign" xml:space="preserve">
-    <value>Their callsign</value>
+  <data name="QRV" xml:space="preserve">
+    <value>就绪</value>
   </data>
-  <data name="LabelWpm" xml:space="preserve">
-    <value>WPM</value>
+  <data name="QRZ" xml:space="preserve">
+    <value>谁在呼叫</value>
   </data>
-  <data name="WindowTitle" xml:space="preserve">
-    <value>Morse Keyer</value>
+  <data name="QSL" xml:space="preserve">
+    <value>确认收妥</value>
+  </data>
+  <data name="QSO" xml:space="preserve">
+    <value>通联</value>
+  </data>
+  <data name="QSP" xml:space="preserve">
+    <value>转发</value>
+  </data>
+  <data name="QSY" xml:space="preserve">
+    <value>换频</value>
+  </data>
+  <data name="QTH" xml:space="preserve">
+    <value>当前位置</value>
   </data>
 </root>

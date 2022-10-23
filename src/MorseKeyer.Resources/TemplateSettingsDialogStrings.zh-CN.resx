@@ -117,37 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GroupBoxTemplates" xml:space="preserve">
-    <value>Templates</value>
-  </data>
-  <data name="InvalidCharacterError" xml:space="preserve">
-    <value>Invalid character(s) are found in message.</value>
-  </data>
-  <data name="LabelFrequency" xml:space="preserve">
-    <value>Freq (Hz)</value>
-  </data>
-  <data name="LabelGain" xml:space="preserve">
-    <value>Gain</value>
+  <data name="ButtonSave" xml:space="preserve">
+    <value>保存</value>
   </data>
   <data name="LabelMessage" xml:space="preserve">
-    <value>Message (Press Enter key to send. Press Esc to cancel sending.)</value>
+    <value>消息</value>
   </data>
-  <data name="LabelMyCallsign" xml:space="preserve">
-    <value>My callsign</value>
+  <data name="LabelName" xml:space="preserve">
+    <value>名称</value>
   </data>
-  <data name="LabelProsigns" xml:space="preserve">
-    <value>Prosigns</value>
+  <data name="RadioButtonAppendingMode" xml:space="preserve">
+    <value>添加到消息框的末尾</value>
   </data>
-  <data name="LabelQCodes" xml:space="preserve">
-    <value>Q-codes</value>
+  <data name="RadioButtonReplacingMode" xml:space="preserve">
+    <value>替换消息框的内容</value>
   </data>
-  <data name="LabelTheirCallsign" xml:space="preserve">
-    <value>Their callsign</value>
-  </data>
-  <data name="LabelWpm" xml:space="preserve">
-    <value>WPM</value>
+  <data name="TextBlockMessageDescription" xml:space="preserve">
+    <value>用 {TX} 表示你的呼号，{RX} 表示对方呼号。</value>
   </data>
   <data name="WindowTitle" xml:space="preserve">
-    <value>Morse Keyer</value>
+    <value>消息模板设置</value>
   </data>
 </root>

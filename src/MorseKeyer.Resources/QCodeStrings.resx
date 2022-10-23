@@ -124,10 +124,10 @@
     <value>Busy</value>
   </data>
   <data name="QRM" xml:space="preserve">
-    <value>Interference</value>
+    <value>Interference by station</value>
   </data>
   <data name="QRN" xml:space="preserve">
-    <value>Interference by station</value>
+    <value>Interference</value>
   </data>
   <data name="QRP" xml:space="preserve">
     <value>Low power</value>
