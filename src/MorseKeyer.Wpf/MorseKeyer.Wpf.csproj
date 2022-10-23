@@ -5,7 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Company>Helloworld</Company>
     <PackageProjectUrl>https://github.com/LYZhelloworld/MorseKeyer</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MorseKeyer.SignalGenerator\MorseKeyer.SignalGenerator.csproj" />
+    <ProjectReference Include="..\MorseKeyer.Resources\MorseKeyer.Resources.csproj" />
   </ItemGroup>
 
 </Project>

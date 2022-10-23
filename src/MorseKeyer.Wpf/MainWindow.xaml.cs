@@ -9,6 +9,7 @@ namespace MorseKeyer.Wpf
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
+    using MorseKeyer.Resources;
     using MorseKeyer.SignalGenerator;
     using MorseKeyer.Wpf.DataStructures;
     using NAudio.Wave;
@@ -165,7 +166,7 @@ namespace MorseKeyer.Wpf
             }
             catch (InvalidCharacterException)
             {
-                MessageBox.Show("Invalid character(s) are found in message.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(MainWindowStrings.InvalidCharacterError, MainWindowStrings.WindowTitle, MessageBoxButton.OK, MessageBoxImage.Error);
                 this.ViewModel.IsSending = false;
             }
         }
