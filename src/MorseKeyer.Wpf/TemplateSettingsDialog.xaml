@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MorseKeyer.Wpf"
+        xmlns:r="clr-namespace:MorseKeyer.Resources;assembly=MorseKeyer.Resources"
         mc:Ignorable="d"
-        Title="Template Settings" Height="Auto" Width="400" ResizeMode="NoResize"
+        Title="{x:Static r:TemplateSettingsDialogStrings.WindowTitle}" Height="Auto" Width="400" ResizeMode="NoResize"
         d:DataContext="{d:DesignInstance Type=local:TemplateSettingsDialogViewModel}"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner">
@@ -21,15 +22,15 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="Name" Target="{Binding ElementName=DisplayNameTextBox}"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="{x:Static r:TemplateSettingsDialogStrings.LabelName}" Target="{Binding ElementName=DisplayNameTextBox}"/>
         <TextBox x:Name="DisplayNameTextBox" Grid.Row="0" Grid.Column="1" Margin="0,5,0,5" d:Text="CQ" Text="{Binding Path=DisplayName}"/>
-        <Label Grid.Row="1" Grid.Column="0" Content="Message" Target="{Binding ElementName=MessageTextBox}"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="{x:Static r:TemplateSettingsDialogStrings.LabelMessage}" Target="{Binding ElementName=MessageTextBox}"/>
         <TextBox Grid.Row="1" Grid.Column="1" x:Name="MessageTextBox" d:Text="CQ CQ CQ" Text="{Binding Path=Message}" Margin="0,5,0,5"/>
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="Use {TX} as a placeholder for your callsign, and {RX} for receiver's callsign." TextWrapping="WrapWithOverflow"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static r:TemplateSettingsDialogStrings.TextBlockMessageDescription}" TextWrapping="WrapWithOverflow"/>
         <StackPanel Grid.Row="3" Grid.Column="1" Margin="0,5,0,0">
-            <RadioButton x:Name="AppendingModeRadioButton" Content="Add to the end of the message box" Margin="0,0,0,5" IsChecked="{Binding Path=IsAppendingMode}"/>
-            <RadioButton x:Name="ReplacingModeRadioButton" Content="Replace the content in the message box" IsChecked="{Binding Path=IsReplacingMode}"/>
+            <RadioButton x:Name="AppendingModeRadioButton" Content="{x:Static r:TemplateSettingsDialogStrings.RadioButtonAppendingMode}" Margin="0,0,0,5" IsChecked="{Binding Path=IsAppendingMode}"/>
+            <RadioButton x:Name="ReplacingModeRadioButton" Content="{x:Static r:TemplateSettingsDialogStrings.RadioButtonReplacingMode}" IsChecked="{Binding Path=IsReplacingMode}"/>
         </StackPanel>
-        <Button x:Name="SaveButton" Grid.Row="4" Grid.Column="1" Content="Save" HorizontalAlignment="Right" Padding="20,0,20,0" Click="SaveButton_Click"/>
+        <Button x:Name="SaveButton" Grid.Row="4" Grid.Column="1" Content="{x:Static r:TemplateSettingsDialogStrings.ButtonSave}" HorizontalAlignment="Right" Padding="20,0,20,0" Click="SaveButton_Click"/>
     </Grid>
 </Window>

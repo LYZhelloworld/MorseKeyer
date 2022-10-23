@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MorseKeyer.Wpf"
         xmlns:dc="clr-namespace:MorseKeyer.Wpf.DataStructures"
+        xmlns:r="clr-namespace:MorseKeyer.Resources;assembly=MorseKeyer.Resources"
         mc:Ignorable="d"
-        Title="Morse Keyer" Height="Auto" Width="600"
+        Title="{x:Static r:MainWindowStrings.WindowTitle}" Height="Auto" Width="600"
         d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
         SizeToContent="Height"
         WindowStartupLocation="CenterScreen">
@@ -18,10 +19,10 @@
     </Window.CommandBindings>
     <DockPanel Margin="5">
         <StackPanel DockPanel.Dock="Top">
-            <Label Content="Message" Target="{Binding ElementName=MessageTextBox}"/>
+            <Label Content="{x:Static r:MainWindowStrings.LabelMessage}" Target="{Binding ElementName=MessageTextBox}"/>
             <TextBox x:Name="MessageTextBox" d:Text="CQ CQ CQ" Text="{Binding Path=Message, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Path=IsMessageControlsEnabled}" KeyDown="MessageTextBox_KeyDown"/>
         </StackPanel>
-        <GroupBox Header="Templates" Margin="0,2,0,0">
+        <GroupBox Header="{x:Static r:MainWindowStrings.GroupBoxTemplates}" Margin="0,2,0,0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -54,7 +55,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Margin="0,0,5,0">
-                            <Label Content="Prosigns" Target="{Binding ElementName=ProsignComboBox}"/>
+                            <Label Content="{x:Static r:MainWindowStrings.LabelProsigns}" Target="{Binding ElementName=ProsignComboBox}"/>
                             <ComboBox x:Name="ProsignComboBox" ItemsSource="{Binding Path=Prosigns}" SelectionChanged="ComboBox_SelectionChanged">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
@@ -68,7 +69,7 @@
                             </ComboBox>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
-                            <Label Content="Q-codes" Target="{Binding ElementName=QCodeComboBox}"/>
+                            <Label Content="{x:Static r:MainWindowStrings.LabelQCodes}" Target="{Binding ElementName=QCodeComboBox}"/>
                             <ComboBox x:Name="QCodeComboBox" ItemsSource="{Binding Path=QCodes}" SelectionChanged="ComboBox_SelectionChanged">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
@@ -84,9 +85,9 @@
                     </Grid>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
-                    <Label Content="My callsign" Target="{Binding ElementName=MyCallsignTextBox}"/>
+                    <Label Content="{x:Static r:MainWindowStrings.LabelMyCallsign}" Target="{Binding ElementName=MyCallsignTextBox}"/>
                     <TextBox x:Name="MyCallsignTextBox" d:Text="BA1ZZZ" Text="{Binding Path=MyCallsign, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Label Content="Their callsign" Target="{Binding ElementName=TheirCallsignTextBox}"/>
+                    <Label Content="{x:Static r:MainWindowStrings.LabelTheirCallsign}" Target="{Binding ElementName=TheirCallsignTextBox}"/>
                     <TextBox x:Name="TheirCallsignTextBox" d:Text="BA1YYY" Text="{Binding Path=TheirCallsign, UpdateSourceTrigger=PropertyChanged}"/>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -98,11 +99,11 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Content="Gain" Target="{Binding ElementName=SignalGainTextBox}"/>
+                        <Label Grid.Row="0" Grid.Column="0" Content="{x:Static r:MainWindowStrings.LabelGain}" Target="{Binding ElementName=SignalGainTextBox}"/>
                         <TextBox x:Name="SignalGainTextBox" Grid.Row="1" Grid.Column="0" Margin="0,0,6,0" d:Text="0.5" Text="{Binding Path=Gain}"/>
-                        <Label Grid.Row="0" Grid.Column="1" Content="Freq (Hz)" Target="{Binding ElementName=SignalFrequencyTextBox}"/>
+                        <Label Grid.Row="0" Grid.Column="1" Content="{x:Static r:MainWindowStrings.LabelFrequency}" Target="{Binding ElementName=SignalFrequencyTextBox}"/>
                         <TextBox x:Name="SignalFrequencyTextBox" Grid.Row="1" Grid.Column="1" d:Text="700" Text="{Binding Path=Frequency}"/>
-                        <Label Grid.Row="0" Grid.Column="2" Content="WPM" Target="{Binding ElementName=WpmTextBox}"/>
+                        <Label Grid.Row="0" Grid.Column="2" Content="{x:Static r:MainWindowStrings.LabelWpm}" Target="{Binding ElementName=WpmTextBox}"/>
                         <TextBox x:Name="WpmTextBox" Grid.Row="1" Grid.Column="2" Margin="5,0,0,0" d:Text="25" Text="{Binding Path=Wpm}"/>
                     </Grid>
                 </StackPanel>

@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MorseKeyer.SignalGenerator\MorseKeyer.SignalGenerator.csproj" />
+    <ProjectReference Include="..\MorseKeyer.Resources\MorseKeyer.Resources.csproj" />
   </ItemGroup>
 
 </Project>

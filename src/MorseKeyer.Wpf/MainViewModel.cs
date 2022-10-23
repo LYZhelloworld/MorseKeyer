@@ -11,6 +11,7 @@ namespace MorseKeyer.Wpf
     using System.Globalization;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using MorseKeyer.Resources;
     using MorseKeyer.Wpf.DataStructures;
 
     /// <summary>
@@ -20,39 +21,39 @@ namespace MorseKeyer.Wpf
     {
         private static readonly IEnumerable<ItemWithDescription> ProsignsValue = new List<ItemWithDescription>
         {
-            new("R", "Roger"),
-            new("K", "Over"),
-            new("<AR>", "Newline"),
-            new("<AS>", "Wait"),
-            new("<VE>", "Verified"),
-            new("?", "Say again"),
-            new("<HH>", "Correction"),
-            new("<BT>", "Break"),
-            new("<KA>", "Attention"),
-            new("73", "Best regards"),
-            new("<KN>", "Go ahead"),
-            new("<SK>", "Out"),
-            new("<SOS>", "Distress signal"),
-            new("<BK>", "Break in"),
+            new("R", ProsignStrings.R),
+            new("K", ProsignStrings.K),
+            new("<AR>", ProsignStrings.AR),
+            new("<AS>", ProsignStrings.AS),
+            new("<VE>", ProsignStrings.VE),
+            new("?", ProsignStrings.QuestionMark),
+            new("<HH>", ProsignStrings.HH),
+            new("<BT>", ProsignStrings.BT),
+            new("<KA>", ProsignStrings.KA),
+            new("73", ProsignStrings.SeventyThree),
+            new("<KN>", ProsignStrings.KN),
+            new("<SK>", ProsignStrings.SK),
+            new("<SOS>", ProsignStrings.SOS),
+            new("<BK>", ProsignStrings.BK),
         }.OrderBy(x => x.Value);
 
         private static readonly IEnumerable<ItemWithDescription> QCodesValue = new List<ItemWithDescription>
         {
-            new("QRA", "Station name"),
-            new("QRL", "Busy"),
-            new("QRM", "Interference"),
-            new("QRN", "Interference by station"),
-            new("QRP", "Low power"),
-            new("QRS", "Slow"),
-            new("QRT", "End of transmission"),
-            new("QRU", "Station not in use"),
-            new("QRV", "Ready"),
-            new("QRZ", "Calling"),
-            new("QSL", "Confirmation of reception"),
-            new("QSO", "Contact"),
-            new("QSP", "Relay to"),
-            new("QSY", "Change frequency"),
-            new("QTH", "Location"),
+            new("QRA", QCodeStrings.QRA),
+            new("QRL", QCodeStrings.QRL),
+            new("QRM", QCodeStrings.QRM),
+            new("QRN", QCodeStrings.QRN),
+            new("QRP", QCodeStrings.QRP),
+            new("QRS", QCodeStrings.QRS),
+            new("QRT", QCodeStrings.QRT),
+            new("QRU", QCodeStrings.QRU),
+            new("QRV", QCodeStrings.QRV),
+            new("QRZ", QCodeStrings.QRZ),
+            new("QSL", QCodeStrings.QSL),
+            new("QSO", QCodeStrings.QSO),
+            new("QSP", QCodeStrings.QSP),
+            new("QSY", QCodeStrings.QSY),
+            new("QTH", QCodeStrings.QTH),
         };
 
         /// <summary>
@@ -63,8 +64,8 @@ namespace MorseKeyer.Wpf
             new("CQ", "CQ CQ CQ DE {TX} {TX} {TX} K"),
             new("QRZ?", "QRZ? DE {TX} K"),
             new("RST", "{RX} DE {TX} UR RST 599 5NN"),
-            new("<my>", "{TX}", true),
-            new("<their>", "{RX}", true),
+            new("{TX}", "{TX}", true),
+            new("{RX}", "{RX}", true),
             new("73", "73", true),
             new("?", "?", true),
             new("NIL", "NIL", true),
