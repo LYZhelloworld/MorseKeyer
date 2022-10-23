@@ -1,0 +1,33 @@
+﻿<Window x:Class="MorseKeyer.Wpf.TemplateSettingsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MorseKeyer.Wpf"
+        mc:Ignorable="d"
+        Title="Template Settings" Height="180" Width="400" ResizeMode="NoResize"
+        d:DataContext="{d:DesignInstance Type=local:TemplateSettingsDialogViewModel}">
+    <Grid Margin="5,0,5,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="Name" Target="{Binding ElementName=DisplayNameTextBox}"/>
+        <TextBox x:Name="DisplayNameTextBox" Grid.Row="0" Grid.Column="1" Margin="0,5,0,5" d:Text="CQ" Text="{Binding Path=DisplayName}"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Message" Target="{Binding ElementName=MessageTextBox}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="MessageTextBox" d:Text="CQ CQ CQ" Text="{Binding Path=Message}" Margin="0,5,0,5"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="Use {TX} as a placeholder for your callsign, and {RX} for receiver's callsign." TextWrapping="WrapWithOverflow"/>
+        <StackPanel Grid.Row="3" Grid.Column="1" Margin="0,5,0,0">
+            <RadioButton x:Name="AppendingModeRadioButton" Content="Add to the end of the message box" Margin="0,0,0,5" IsChecked="{Binding Path=IsAppendingMode}"/>
+            <RadioButton x:Name="ReplacingModeRadioButton" Content="Replace the content in the message box" IsChecked="{Binding Path=IsReplacingMode}"/>
+        </StackPanel>
+        <Button x:Name="SaveButton" Grid.Row="4" Grid.Column="1" Content="Save" HorizontalAlignment="Right" Padding="20,0,20,0"/>
+    </Grid>
+</Window>

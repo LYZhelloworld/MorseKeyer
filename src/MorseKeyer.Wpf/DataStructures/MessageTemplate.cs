@@ -8,7 +8,7 @@ namespace MorseKeyer.Wpf.DataStructures
     /// <summary>
     /// The template of a message, used on the buttons to set the message to send.
     /// </summary>
-    internal record MessageTemplate
+    public record MessageTemplate
     {
         /// <summary>
         /// The placeholder for my callsign.
