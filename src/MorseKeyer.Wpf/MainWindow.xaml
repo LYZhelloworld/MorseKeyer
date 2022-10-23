@@ -30,14 +30,14 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="CQTemplateButton" Grid.Row="0" Grid.Column="0" Content="CQ" Margin="0,0,5,5" Click="CQTemplateButton_Click"/>
-                        <Button x:Name="QRZTemplateButton" Grid.Row="0" Grid.Column="1" Content="QRZ?" Margin="0,0,5,5" Click="QRZTemplateButton_Click"/>
-                        <Button x:Name="RstTemplateButton" Grid.Row="0" Grid.Column="2" Content="RST" Margin="0,0,5,5" Click="RstTemplateButton_Click"/>
-                        <Button x:Name="MyCallsignTemplateButton" Grid.Row="0" Grid.Column="3" Content="&lt;my&gt;" Margin="0,0,5,5" Click="MyCallsignTemplateButton_Click"/>
-                        <Button x:Name="TheirCallsignTemplateButton" Grid.Row="1" Grid.Column="0" Content="&lt;their&gt;" Margin="0,0,5,0" Click="TheirCallsignTemplateButton_Click"/>
-                        <Button x:Name="SeventyThreeTemplateButton" Grid.Row="1" Grid.Column="1" Content="73" Margin="0,0,5,0" Click="SeventyThreeTemplateButton_Click"/>
-                        <Button x:Name="SayAgainTemplateButton" Grid.Row="1" Grid.Column="2" Content="?" Margin="0,0,5,0" Click="SayAgainTemplateButton_Click"/>
-                        <Button x:Name="NILTemplateButton" Grid.Row="1" Grid.Column="3" Content="NIL" Margin="0,0,5,0" Click="NILTemplateButton_Click"/>
+                        <Button Grid.Row="0" Grid.Column="0" Margin="0,0,5,5" Content="{Binding Path=DisplayName}" d:Content="0" DataContext="{Binding Path=MessageTemplates[0]}" d:DataContext="{d:DesignInstance Type=local:MessageTemplate}" Click="MessageTemplateButton_Click"/>
+                        <Button Grid.Row="0" Grid.Column="1" Margin="0,0,5,5" Content="{Binding Path=DisplayName}" d:Content="1" DataContext="{Binding Path=MessageTemplates[1]}" d:DataContext="{d:DesignInstance Type=local:MessageTemplate}" Click="MessageTemplateButton_Click"/>
+                        <Button Grid.Row="0" Grid.Column="2" Margin="0,0,5,5" Content="{Binding Path=DisplayName}" d:Content="2" DataContext="{Binding Path=MessageTemplates[2]}" d:DataContext="{d:DesignInstance Type=local:MessageTemplate}" Click="MessageTemplateButton_Click"/>
+                        <Button Grid.Row="0" Grid.Column="3" Margin="0,0,5,5" Content="{Binding Path=DisplayName}" d:Content="3" DataContext="{Binding Path=MessageTemplates[3]}" d:DataContext="{d:DesignInstance Type=local:MessageTemplate}" Click="MessageTemplateButton_Click"/>
+                        <Button Grid.Row="1" Grid.Column="0" Margin="0,0,5,0" Content="{Binding Path=DisplayName}" d:Content="4" DataContext="{Binding Path=MessageTemplates[4]}" d:DataContext="{d:DesignInstance Type=local:MessageTemplate}" Click="MessageTemplateButton_Click"/>
+                        <Button Grid.Row="1" Grid.Column="1" Margin="0,0,5,0" Content="{Binding Path=DisplayName}" d:Content="5" DataContext="{Binding Path=MessageTemplates[5]}" d:DataContext="{d:DesignInstance Type=local:MessageTemplate}" Click="MessageTemplateButton_Click"/>
+                        <Button Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" Content="{Binding Path=DisplayName}" d:Content="6" DataContext="{Binding Path=MessageTemplates[6]}" d:DataContext="{d:DesignInstance Type=local:MessageTemplate}" Click="MessageTemplateButton_Click"/>
+                        <Button Grid.Row="1" Grid.Column="3" Margin="0,0,5,0" Content="{Binding Path=DisplayName}" d:Content="7" DataContext="{Binding Path=MessageTemplates[7]}" d:DataContext="{d:DesignInstance Type=local:MessageTemplate}" Click="MessageTemplateButton_Click"/>
                     </Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>

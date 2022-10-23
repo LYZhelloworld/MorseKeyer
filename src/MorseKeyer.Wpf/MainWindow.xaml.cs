@@ -5,6 +5,7 @@
 
 namespace MorseKeyer.Wpf
 {
+    using System;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -27,10 +28,10 @@ namespace MorseKeyer.Wpf
         /// <summary>
         /// Appends new message to the end of the message box.
         /// </summary>
-        /// <param name="newMessage">The message to add.</param>
+        /// <param name="message">The message to add.</param>
         /// <param name="requireMyCallsign">A value that indicates whether "My callsign" needs to be non-empty.</param>
         /// <param name="requireTheirCallsign">A value that indicates whether "Their callsign" needs to be non-empty.</param>
-        private void AppendMessage(string newMessage, bool requireMyCallsign = false, bool requireTheirCallsign = false)
+        private void AppendMessage(string message, bool requireMyCallsign = false, bool requireTheirCallsign = false)
         {
             if (requireMyCallsign && string.IsNullOrEmpty(this.ViewModel.MyCallsign))
             {
@@ -46,11 +47,11 @@ namespace MorseKeyer.Wpf
 
             if (this.ViewModel.Message.EndsWith(" ", System.StringComparison.InvariantCulture))
             {
-                this.ViewModel.Message += newMessage;
+                this.ViewModel.Message += message;
             }
             else
             {
-                this.ViewModel.Message += " " + newMessage;
+                this.ViewModel.Message += " " + message;
             }
 
             // Put caret at the end.
@@ -86,44 +87,23 @@ namespace MorseKeyer.Wpf
             this.MessageTextBox.SelectionLength = 0;
         }
 
-        private void CQTemplateButton_Click(object sender, RoutedEventArgs e)
+        private void MessageTemplateButton_Click(object sender, RoutedEventArgs e)
         {
-            this.SetMessage($"CQ CQ CQ DE {this.ViewModel.MyCallsign} {this.ViewModel.MyCallsign} {this.ViewModel.MyCallsign} K", requireMyCallsign: true);
-        }
-
-        private void QRZTemplateButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.SetMessage($"QRZ? DE {this.ViewModel.MyCallsign} K", requireMyCallsign: true);
-        }
-
-        private void RstTemplateButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.SetMessage($"{this.ViewModel.TheirCallsign} DE {this.ViewModel.MyCallsign} UR RST 599 5NN", requireMyCallsign: true, requireTheirCallsign: true);
-        }
-
-        private void MyCallsignTemplateButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.AppendMessage(this.ViewModel.MyCallsign, requireMyCallsign: true);
-        }
-
-        private void TheirCallsignTemplateButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.AppendMessage(this.ViewModel.TheirCallsign, requireTheirCallsign: true);
-        }
-
-        private void SeventyThreeTemplateButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.AppendMessage("73");
-        }
-
-        private void SayAgainTemplateButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.AppendMessage("?");
-        }
-
-        private void NILTemplateButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.AppendMessage("NIL");
+            if (sender is Button button
+                && button.DataContext is MessageTemplate messageTemplate)
+            {
+                var message = messageTemplate.Message
+                    .Replace(MessageTemplate.MyCallsignPlaceholder, this.ViewModel.MyCallsign, StringComparison.OrdinalIgnoreCase)
+                    .Replace(MessageTemplate.TheirCallsignPlaceholder, this.ViewModel.TheirCallsign, StringComparison.OrdinalIgnoreCase);
+                if (messageTemplate.IsAppend)
+                {
+                    this.AppendMessage(message, messageTemplate.RequireMyCallsign, messageTemplate.RequireTheirCallsign);
+                }
+                else
+                {
+                    this.SetMessage(message, messageTemplate.RequireMyCallsign, messageTemplate.RequireTheirCallsign);
+                }
+            }
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

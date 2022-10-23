@@ -6,6 +6,7 @@
 namespace MorseKeyer.Wpf
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Globalization;
     using System.Linq;
@@ -53,7 +54,23 @@ namespace MorseKeyer.Wpf
             new("QTH", "Location"),
         };
 
+        /// <summary>
+        /// The default value of message templates.
+        /// </summary>
+        private static readonly MessageTemplate[] DefaultMessageTemplates = new MessageTemplate[8]
+        {
+            new("CQ", "CQ CQ CQ DE {TX} {TX} {TX} K"),
+            new("QRZ?", "QRZ? DE {TX} K"),
+            new("RST", "{RX} DE {TX} UR RST 599 5NN"),
+            new("<my>", "{TX}", true),
+            new("<their>", "{RX}", true),
+            new("73", "73", true),
+            new("?", "?", true),
+            new("NIL", "NIL", true),
+        };
+
         private string message = string.Empty;
+        private ObservableCollection<MessageTemplate> messageTemplates = new ObservableCollection<MessageTemplate>(DefaultMessageTemplates);
         private string myCallsign = string.Empty;
         private string theirCallsign = string.Empty;
         private double gain = 0.5;
@@ -80,6 +97,15 @@ namespace MorseKeyer.Wpf
         {
             get => this.message;
             set => this.SetProperty(ref this.message, value.ToUpperInvariant());
+        }
+
+        /// <summary>
+        /// Gets or sets the message templates.
+        /// </summary>
+        public ObservableCollection<MessageTemplate> MessageTemplates
+        {
+            get => this.messageTemplates;
+            set => this.SetProperty(ref this.messageTemplates, value);
         }
 
         /// <summary>
