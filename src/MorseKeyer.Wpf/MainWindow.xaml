@@ -1,0 +1,112 @@
+﻿<Window x:Class="MorseKeyer.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MorseKeyer.Wpf"
+        xmlns:dc="clr-namespace:MorseKeyer.Wpf.DataStructures"
+        mc:Ignorable="d"
+        Title="Morse Keyer" Height="Auto" Width="600"
+        d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterScreen">
+    <Window.InputBindings>
+        <KeyBinding Command="{x:Static local:MainWindow.StopPlayingCommand}" Key="Esc"/>
+    </Window.InputBindings>
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:MainWindow.StopPlayingCommand}" Executed="StopPlayingCommand_Executed" CanExecute="StopPlayingCommand_CanExecute"/>
+    </Window.CommandBindings>
+    <DockPanel Margin="5">
+        <StackPanel DockPanel.Dock="Top">
+            <Label Content="Message" Target="{Binding ElementName=MessageTextBox}"/>
+            <TextBox x:Name="MessageTextBox" d:Text="CQ CQ CQ" Text="{Binding Path=Message, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Path=IsMessageControlsEnabled}" KeyDown="MessageTextBox_KeyDown"/>
+        </StackPanel>
+        <GroupBox Header="Templates" Margin="0,2,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Row="0" Grid.Column="0" Margin="0,0,5,5" Content="{Binding Path=DisplayName}" d:Content="0" DataContext="{Binding Path=MessageTemplates[0]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplate}" Click="MessageTemplateButton_Click" MouseRightButtonDown="MessageTemplateButton_RightClick"/>
+                        <Button Grid.Row="0" Grid.Column="1" Margin="0,0,5,5" Content="{Binding Path=DisplayName}" d:Content="1" DataContext="{Binding Path=MessageTemplates[1]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplate}" Click="MessageTemplateButton_Click" MouseRightButtonDown="MessageTemplateButton_RightClick"/>
+                        <Button Grid.Row="0" Grid.Column="2" Margin="0,0,5,5" Content="{Binding Path=DisplayName}" d:Content="2" DataContext="{Binding Path=MessageTemplates[2]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplate}" Click="MessageTemplateButton_Click" MouseRightButtonDown="MessageTemplateButton_RightClick"/>
+                        <Button Grid.Row="0" Grid.Column="3" Margin="0,0,5,5" Content="{Binding Path=DisplayName}" d:Content="3" DataContext="{Binding Path=MessageTemplates[3]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplate}" Click="MessageTemplateButton_Click" MouseRightButtonDown="MessageTemplateButton_RightClick"/>
+                        <Button Grid.Row="1" Grid.Column="0" Margin="0,0,5,0" Content="{Binding Path=DisplayName}" d:Content="4" DataContext="{Binding Path=MessageTemplates[4]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplate}" Click="MessageTemplateButton_Click" MouseRightButtonDown="MessageTemplateButton_RightClick"/>
+                        <Button Grid.Row="1" Grid.Column="1" Margin="0,0,5,0" Content="{Binding Path=DisplayName}" d:Content="5" DataContext="{Binding Path=MessageTemplates[5]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplate}" Click="MessageTemplateButton_Click" MouseRightButtonDown="MessageTemplateButton_RightClick"/>
+                        <Button Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" Content="{Binding Path=DisplayName}" d:Content="6" DataContext="{Binding Path=MessageTemplates[6]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplate}" Click="MessageTemplateButton_Click" MouseRightButtonDown="MessageTemplateButton_RightClick"/>
+                        <Button Grid.Row="1" Grid.Column="3" Margin="0,0,5,0" Content="{Binding Path=DisplayName}" d:Content="7" DataContext="{Binding Path=MessageTemplates[7]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplate}" Click="MessageTemplateButton_Click" MouseRightButtonDown="MessageTemplateButton_RightClick"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                            <Label Content="Prosigns" Target="{Binding ElementName=ProsignComboBox}"/>
+                            <ComboBox x:Name="ProsignComboBox" ItemsSource="{Binding Path=Prosigns}" SelectionChanged="ComboBox_SelectionChanged">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Path=Value}"/>
+                                            <TextBlock Text=" - "/>
+                                            <TextBlock Text="{Binding Path=Description}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <Label Content="Q-codes" Target="{Binding ElementName=QCodeComboBox}"/>
+                            <ComboBox x:Name="QCodeComboBox" ItemsSource="{Binding Path=QCodes}" SelectionChanged="ComboBox_SelectionChanged">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Path=Value}"/>
+                                            <TextBlock Text=" - "/>
+                                            <TextBlock Text="{Binding Path=Description}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <Label Content="My callsign" Target="{Binding ElementName=MyCallsignTextBox}"/>
+                    <TextBox x:Name="MyCallsignTextBox" d:Text="BA1ZZZ" Text="{Binding Path=MyCallsign, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Content="Their callsign" Target="{Binding ElementName=TheirCallsignTextBox}"/>
+                    <TextBox x:Name="TheirCallsignTextBox" d:Text="BA1YYY" Text="{Binding Path=TheirCallsign, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="Gain" Target="{Binding ElementName=SignalGainTextBox}"/>
+                        <TextBox x:Name="SignalGainTextBox" Grid.Row="1" Grid.Column="0" Margin="0,0,6,0" d:Text="0.5" Text="{Binding Path=Gain}"/>
+                        <Label Grid.Row="0" Grid.Column="1" Content="Freq (Hz)" Target="{Binding ElementName=SignalFrequencyTextBox}"/>
+                        <TextBox x:Name="SignalFrequencyTextBox" Grid.Row="1" Grid.Column="1" d:Text="700" Text="{Binding Path=Frequency}"/>
+                        <Label Grid.Row="0" Grid.Column="2" Content="WPM" Target="{Binding ElementName=WpmTextBox}"/>
+                        <TextBox x:Name="WpmTextBox" Grid.Row="1" Grid.Column="2" Margin="5,0,0,0" d:Text="25" Text="{Binding Path=Wpm}"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </DockPanel>
+</Window>
