@@ -181,6 +181,28 @@ namespace MorseKeyer.Wpf
             }
         }
 
+        private void MessageTemplateButton_RightClick(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Button button
+                && button.DataContext is MessageTemplate messageTemplate)
+            {
+                var templateSettingsDialog = new TemplateSettingsDialog()
+                {
+                    DataContext = new TemplateSettingsDialogViewModel()
+                    {
+                        MessageTemplate = messageTemplate,
+                    },
+                    Owner = this,
+                };
+                var result = templateSettingsDialog.ShowDialog() ?? false;
+
+                if (result)
+                {
+                    button.DataContext = ((TemplateSettingsDialogViewModel)templateSettingsDialog.DataContext).MessageTemplate;
+                }
+            }
+        }
+
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sender is ComboBox comboBox)

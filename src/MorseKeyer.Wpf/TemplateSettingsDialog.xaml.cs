@@ -24,5 +24,11 @@ namespace MorseKeyer.Wpf
         /// Gets the data context.
         /// </summary>
         public TemplateSettingsDialogViewModel ViewModel => (TemplateSettingsDialogViewModel)this.DataContext;
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+            this.Close();
+        }
     }
 }

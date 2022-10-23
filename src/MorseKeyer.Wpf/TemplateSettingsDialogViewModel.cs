@@ -73,14 +73,36 @@ namespace MorseKeyer.Wpf
         }
 
         /// <summary>
-        /// Gets a value indicating whether the template is to be added to the end of the message box.
+        /// Gets or sets a value indicating whether the template is to be added to the end of the message box.
         /// </summary>
-        public bool IsAppendingMode => this.IsAppend;
+        public bool IsAppendingMode
+        {
+            get
+            {
+                return this.IsAppend;
+            }
+
+            set
+            {
+                this.IsAppend = value;
+            }
+        }
 
         /// <summary>
-        /// Gets a value indicating whether the template is to replace the content in the message box.
+        /// Gets or sets a value indicating whether the template is to replace the content in the message box.
         /// </summary>
-        public bool IsReplacingMode => !this.IsAppend;
+        public bool IsReplacingMode
+        {
+            get
+            {
+                return !this.IsAppend;
+            }
+
+            set
+            {
+                this.IsAppend = !value;
+            }
+        }
 
         /// <summary>
         /// Sets a property.

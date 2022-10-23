@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MorseKeyer.Wpf"
         mc:Ignorable="d"
-        Title="Template Settings" Height="180" Width="400" ResizeMode="NoResize"
-        d:DataContext="{d:DesignInstance Type=local:TemplateSettingsDialogViewModel}">
+        Title="Template Settings" Height="Auto" Width="400" ResizeMode="NoResize"
+        d:DataContext="{d:DesignInstance Type=local:TemplateSettingsDialogViewModel}"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterOwner">
     <Grid Margin="5,0,5,5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -28,6 +30,6 @@
             <RadioButton x:Name="AppendingModeRadioButton" Content="Add to the end of the message box" Margin="0,0,0,5" IsChecked="{Binding Path=IsAppendingMode}"/>
             <RadioButton x:Name="ReplacingModeRadioButton" Content="Replace the content in the message box" IsChecked="{Binding Path=IsReplacingMode}"/>
         </StackPanel>
-        <Button x:Name="SaveButton" Grid.Row="4" Grid.Column="1" Content="Save" HorizontalAlignment="Right" Padding="20,0,20,0"/>
+        <Button x:Name="SaveButton" Grid.Row="4" Grid.Column="1" Content="Save" HorizontalAlignment="Right" Padding="20,0,20,0" Click="SaveButton_Click"/>
     </Grid>
 </Window>
