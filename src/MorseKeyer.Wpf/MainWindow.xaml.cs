@@ -6,12 +6,15 @@
 namespace MorseKeyer.Wpf
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
     using MorseKeyer.Resources;
     using MorseKeyer.SignalGenerator;
     using MorseKeyer.Wpf.DataStructures;
+    using MorseKeyer.Wpf.Helpers;
     using NAudio.Wave;
 
     /// <summary>
@@ -30,6 +33,11 @@ namespace MorseKeyer.Wpf
         private WaveOutEvent? waveOutEvent;
 
         /// <summary>
+        /// The event for playing morse code on secondary device.
+        /// </summary>
+        private WaveOutEvent? secondaryWaveOutEvent;
+
+        /// <summary>
         /// A value that indicates whether the playback event has been cancelled.
         /// When cancelling the event, the message textbox will not be cleared.
         /// </summary>
@@ -41,12 +49,53 @@ namespace MorseKeyer.Wpf
         public MainWindow()
         {
             this.InitializeComponent();
+            this.Loaded += (sender, e) => this.RefreshOutputDevices();
         }
 
         /// <summary>
         /// Gets the data context.
         /// </summary>
         private MainViewModel ViewModel => (MainViewModel)this.DataContext;
+
+        /// <summary>
+        /// Creates <see cref="WaveOutEvent"/> with given <see cref="ISampleProvider"/>.
+        /// </summary>
+        /// <param name="provider">The <see cref="ISampleProvider"/> to create <see cref="WaveOutEvent"/> with.</param>
+        /// <param name="deviceNumber">The device number. If the number is invalid, <c>-1</c> (default device) will be used.</param>
+        /// <param name="playbackStoppedEventHandler">The event handler triggered after the playback stops.</param>
+        /// <returns>A new <see cref="WaveOutEvent"/> object.</returns>
+        private static WaveOutEvent CreateWaveOutEvent(ISampleProvider provider, int deviceNumber, EventHandler<StoppedEventArgs> playbackStoppedEventHandler)
+        {
+            if (deviceNumber >= WaveOut.DeviceCount)
+            {
+                deviceNumber = -1;
+            }
+
+            var waveOutEvent = new WaveOutEvent()
+            {
+                DeviceNumber = deviceNumber,
+            };
+
+            waveOutEvent.Init(provider);
+            waveOutEvent.PlaybackStopped += playbackStoppedEventHandler;
+            return waveOutEvent;
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="MorseGenerator"/>.
+        /// </summary>
+        /// <param name="message">The message to send.</param>
+        /// <returns>A new <see cref="MorseGenerator"/> object.</returns>
+        /// <exception cref="InvalidCharacterException">Thrown when message contains invalid characters.</exception>
+        private ISampleProvider CreateMorseGenerator(string message)
+        {
+            return new MorseGenerator(message, new()
+            {
+                Gain = this.ViewModel.Gain,
+                Frequency = this.ViewModel.Frequency,
+                Wpm = this.ViewModel.Wpm,
+            });
+        }
 
         /// <summary>
         /// Appends new message to the end of the message box.
@@ -73,7 +122,7 @@ namespace MorseKeyer.Wpf
                 return;
             }
 
-            if (this.ViewModel.Message.EndsWith(" ", StringComparison.InvariantCulture))
+            if (string.IsNullOrEmpty(this.ViewModel.Message) || this.ViewModel.Message.EndsWith(" ", StringComparison.InvariantCulture))
             {
                 this.ViewModel.Message += message;
             }
@@ -81,6 +130,8 @@ namespace MorseKeyer.Wpf
             {
                 this.ViewModel.Message += " " + message;
             }
+
+            this.MessageTextBox.Focus();
 
             // Put caret at the end.
             this.MessageTextBox.SelectionStart = this.MessageTextBox.Text.Length;
@@ -135,20 +186,15 @@ namespace MorseKeyer.Wpf
 
             try
             {
-                var provider = new MorseGenerator(message, new()
-                {
-                    Gain = this.ViewModel.Gain,
-                    Frequency = this.ViewModel.Frequency,
-                    Wpm = this.ViewModel.Wpm,
-                });
-
                 this.waveOutEvent?.Stop();
-                this.waveOutEvent = new();
-                this.waveOutEvent.Init(provider);
-                this.isCancelled = false;
+                this.waveOutEvent = null;
 
-                this.waveOutEvent.PlaybackStopped += (sender, e) =>
+                this.secondaryWaveOutEvent?.Stop();
+                this.secondaryWaveOutEvent = null;
+
+                this.waveOutEvent = CreateWaveOutEvent(this.CreateMorseGenerator(message), this.OutputDeviceComboBox.SelectedItem is KeyValuePair<int, string> item ? item.Key : -1, (sender, e) =>
                 {
+                    this.waveOutEvent = null;
                     this.Dispatcher.Invoke(() =>
                     {
                         this.ViewModel.IsSending = false;
@@ -160,14 +206,44 @@ namespace MorseKeyer.Wpf
 
                         this.MessageTextBox.Focus();
                     });
-                };
+                });
 
+                if (this.ViewModel.IsSecondaryOutputDeviceEnabled)
+                {
+                    this.secondaryWaveOutEvent = CreateWaveOutEvent(this.CreateMorseGenerator(message), this.SecondaryOutputDeviceComboBox.SelectedItem is KeyValuePair<int, string> secondaryItem ? secondaryItem.Key : -1, (sender, e) =>
+                    {
+                        this.secondaryWaveOutEvent = null;
+                    });
+                }
+
+                this.isCancelled = false;
                 this.waveOutEvent.Play();
+                this.secondaryWaveOutEvent?.Play();
             }
             catch (InvalidCharacterException)
             {
                 MessageBox.Show(MainWindowStrings.InvalidCharacterError, MainWindowStrings.WindowTitle, MessageBoxButton.OK, MessageBoxImage.Error);
                 this.ViewModel.IsSending = false;
+            }
+        }
+
+        /// <summary>
+        /// Refreshes the list of output devices.
+        /// </summary>
+        private void RefreshOutputDevices()
+        {
+            this.ViewModel.OutputDevices = DeviceNameHelper.GetOutputDevices()
+                .Prepend(KeyValuePair.Create(-1, MainWindowStrings.DeviceNameDefault)); // Prepend default device.
+
+            // Use ">" here because there is another item "Default" in the list.
+            if (this.OutputDeviceComboBox.SelectedIndex == -1 || this.OutputDeviceComboBox.SelectedIndex > this.ViewModel.OutputDevices.Count())
+            {
+                this.OutputDeviceComboBox.SelectedIndex = 0;
+            }
+
+            if (this.SecondaryOutputDeviceComboBox.SelectedIndex == -1 || this.SecondaryOutputDeviceComboBox.SelectedIndex > this.ViewModel.OutputDevices.Count())
+            {
+                this.SecondaryOutputDeviceComboBox.SelectedIndex = 0;
             }
         }
 
@@ -216,9 +292,9 @@ namespace MorseKeyer.Wpf
         {
             if (sender is ComboBox comboBox)
             {
-                if (comboBox.SelectedItem is ItemWithDescription item)
+                if (comboBox.SelectedItem is KeyValuePair<string, string> item)
                 {
-                    this.AppendMessage(item.Value);
+                    this.AppendMessage(item.Key);
                 }
 
                 comboBox.SelectedIndex = -1;
@@ -237,11 +313,17 @@ namespace MorseKeyer.Wpf
         {
             this.isCancelled = true;
             this.waveOutEvent?.Stop();
+            this.secondaryWaveOutEvent?.Stop();
         }
 
         private void StopPlayingCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = this.waveOutEvent != null;
+        }
+
+        private void OutputDeviceComboBox_DropDownOpened(object sender, EventArgs e)
+        {
+            this.RefreshOutputDevices();
         }
     }
 }

@@ -7,7 +7,7 @@
         xmlns:dc="clr-namespace:MorseKeyer.Wpf.DataStructures"
         xmlns:r="clr-namespace:MorseKeyer.Resources;assembly=MorseKeyer.Resources"
         mc:Ignorable="d"
-        Title="{x:Static r:MainWindowStrings.WindowTitle}" Height="Auto" Width="600"
+        Title="{x:Static r:MainWindowStrings.WindowTitle}" Height="Auto" Width="600" ResizeMode="NoResize"
         d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
         SizeToContent="Height"
         WindowStartupLocation="CenterScreen">
@@ -60,9 +60,9 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Path=Value}"/>
+                                            <TextBlock Text="{Binding Path=Key}"/>
                                             <TextBlock Text=" - "/>
-                                            <TextBlock Text="{Binding Path=Description}"/>
+                                            <TextBlock Text="{Binding Path=Value}"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -74,21 +74,37 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Path=Value}"/>
+                                            <TextBlock Text="{Binding Path=Key}"/>
                                             <TextBlock Text=" - "/>
-                                            <TextBlock Text="{Binding Path=Description}"/>
+                                            <TextBlock Text="{Binding Path=Value}"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ComboBox>
                         </StackPanel>
                     </Grid>
-                </StackPanel>
-                <StackPanel Grid.Column="1">
                     <Label Content="{x:Static r:MainWindowStrings.LabelMyCallsign}" Target="{Binding ElementName=MyCallsignTextBox}"/>
                     <TextBox x:Name="MyCallsignTextBox" d:Text="BA1ZZZ" Text="{Binding Path=MyCallsign, UpdateSourceTrigger=PropertyChanged}"/>
                     <Label Content="{x:Static r:MainWindowStrings.LabelTheirCallsign}" Target="{Binding ElementName=TheirCallsignTextBox}"/>
                     <TextBox x:Name="TheirCallsignTextBox" d:Text="BA1YYY" Text="{Binding Path=TheirCallsign, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <Label Content="{x:Static r:MainWindowStrings.LabelOutputDevice}" Target="{Binding ElementName=OutputDeviceComboBox}"/>
+                    <ComboBox x:Name="OutputDeviceComboBox" ItemsSource="{Binding Path=OutputDevices}" DropDownOpened="OutputDeviceComboBox_DropDownOpened">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Value}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ComboBox>
+                    <CheckBox Content="{x:Static r:MainWindowStrings.LabelSecondaryOutputDevice}" Margin="0,5,0,0" IsChecked="{Binding Path=IsSecondaryOutputDeviceEnabled}"/>
+                    <ComboBox x:Name="SecondaryOutputDeviceComboBox" Margin="0,0,0,5" ItemsSource="{Binding Path=OutputDevices}" IsEnabled="{Binding Path=IsSecondaryOutputDeviceEnabled}" DropDownOpened="OutputDeviceComboBox_DropDownOpened">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Value}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ComboBox>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>

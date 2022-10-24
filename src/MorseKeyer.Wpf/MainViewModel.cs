@@ -13,13 +13,14 @@ namespace MorseKeyer.Wpf
     using System.Runtime.CompilerServices;
     using MorseKeyer.Resources;
     using MorseKeyer.Wpf.DataStructures;
+    using NAudio.Wave;
 
     /// <summary>
     /// The view model for <see cref="MainWindow"/>.
     /// </summary>
     internal class MainViewModel : INotifyPropertyChanged
     {
-        private static readonly IEnumerable<ItemWithDescription> ProsignsValue = new List<ItemWithDescription>
+        private static readonly IEnumerable<KeyValuePair<string, string>> ProsignsValue = new List<KeyValuePair<string, string>>
         {
             new("R", ProsignStrings.R),
             new("K", ProsignStrings.K),
@@ -37,7 +38,7 @@ namespace MorseKeyer.Wpf
             new("<BK>", ProsignStrings.BK),
         }.OrderBy(x => x.Value);
 
-        private static readonly IEnumerable<ItemWithDescription> QCodesValue = new List<ItemWithDescription>
+        private static readonly IEnumerable<KeyValuePair<string, string>> QCodesValue = new List<KeyValuePair<string, string>>
         {
             new("QRA", QCodeStrings.QRA),
             new("QRL", QCodeStrings.QRL),
@@ -79,6 +80,8 @@ namespace MorseKeyer.Wpf
         private int frequency = 700;
         private int wpm = 25;
         private bool isSending;
+        private ObservableCollection<KeyValuePair<int, string>> outputDevices = new();
+        private bool isSecondaryOutputDeviceEnabled;
 
         /// <inheritdoc/>
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -86,12 +89,12 @@ namespace MorseKeyer.Wpf
         /// <summary>
         /// Gets the prosigns used in morse code.
         /// </summary>
-        public static IEnumerable<ItemWithDescription> Prosigns => ProsignsValue;
+        public static IEnumerable<KeyValuePair<string, string>> Prosigns => ProsignsValue;
 
         /// <summary>
         /// Gets the Q-codes used in morse code.
         /// </summary>
-        public static IEnumerable<ItemWithDescription> QCodes => QCodesValue;
+        public static IEnumerable<KeyValuePair<string, string>> QCodes => QCodesValue;
 
         /// <summary>
         /// Gets or sets the message to send.
@@ -105,10 +108,10 @@ namespace MorseKeyer.Wpf
         /// <summary>
         /// Gets or sets the message templates.
         /// </summary>
-        public ObservableCollection<MessageTemplate> MessageTemplates
+        public IEnumerable<MessageTemplate> MessageTemplates
         {
             get => this.messageTemplates;
-            set => this.SetProperty(ref this.messageTemplates, value);
+            set => this.SetProperty(ref this.messageTemplates, new ObservableCollection<MessageTemplate>(value));
         }
 
         /// <summary>
@@ -215,8 +218,10 @@ namespace MorseKeyer.Wpf
             get => this.isSending;
             set
             {
-                this.SetProperty(ref this.isSending, value);
-                this.PropertyChanged?.Invoke(this, new(nameof(this.IsMessageControlsEnabled)));
+                if (this.SetProperty(ref this.isSending, value))
+                {
+                    this.PropertyChanged?.Invoke(this, new(nameof(this.IsMessageControlsEnabled)));
+                }
             }
         }
 
@@ -226,6 +231,24 @@ namespace MorseKeyer.Wpf
         public bool IsMessageControlsEnabled
         {
             get => !this.isSending;
+        }
+
+        /// <summary>
+        /// Gets or sets output devices.
+        /// </summary>
+        public IEnumerable<KeyValuePair<int, string>> OutputDevices
+        {
+            get => this.outputDevices;
+            set => this.SetProperty(ref this.outputDevices, new ObservableCollection<KeyValuePair<int, string>>(value));
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the secondary output device is enabled.
+        /// </summary>
+        public bool IsSecondaryOutputDeviceEnabled
+        {
+            get => this.isSecondaryOutputDeviceEnabled;
+            set => this.SetProperty(ref this.isSecondaryOutputDeviceEnabled, value);
         }
 
         /// <summary>

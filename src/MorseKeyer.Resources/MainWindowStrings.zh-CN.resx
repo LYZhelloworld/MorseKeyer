@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DeviceNameDefault" xml:space="preserve">
+    <value>默认设备</value>
+  </data>
   <data name="GroupBoxTemplates" xml:space="preserve">
     <value>预存消息</value>
   </data>
@@ -135,11 +138,17 @@
   <data name="LabelMyCallsign" xml:space="preserve">
     <value>我的呼号</value>
   </data>
+  <data name="LabelOutputDevice" xml:space="preserve">
+    <value>输出设备</value>
+  </data>
   <data name="LabelProsigns" xml:space="preserve">
     <value>简语</value>
   </data>
   <data name="LabelQCodes" xml:space="preserve">
     <value>Q简语</value>
+  </data>
+  <data name="LabelSecondaryOutputDevice" xml:space="preserve">
+    <value>第二输出设备</value>
   </data>
   <data name="LabelTheirCallsign" xml:space="preserve">
     <value>对方呼号</value>
