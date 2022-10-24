@@ -34,7 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "setup", "setup", "{AAD6B125
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseKeyer.Resources", "src\MorseKeyer.Resources\MorseKeyer.Resources.csproj", "{C235A7EC-5D98-4A42-A8BD-3F71E9170ECF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorseKeyer.Wpf.FunctionalTest", "test\MorseKeyer.Wpf.FunctionalTest\MorseKeyer.Wpf.FunctionalTest.csproj", "{7B959A69-F71A-4CA2-AC4E-062D57B60E9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseKeyer.Wpf.FunctionalTest", "test\MorseKeyer.Wpf.FunctionalTest\MorseKeyer.Wpf.FunctionalTest.csproj", "{7B959A69-F71A-4CA2-AC4E-062D57B60E9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

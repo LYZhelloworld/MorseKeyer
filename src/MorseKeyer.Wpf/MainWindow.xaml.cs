@@ -82,7 +82,7 @@ namespace MorseKeyer.Wpf
                 return;
             }
 
-            if (this.ViewModel.Message.EndsWith(" ", StringComparison.InvariantCulture))
+            if (string.IsNullOrEmpty(this.ViewModel.Message) || this.ViewModel.Message.EndsWith(" ", StringComparison.InvariantCulture))
             {
                 this.ViewModel.Message += message;
             }
@@ -90,6 +90,8 @@ namespace MorseKeyer.Wpf
             {
                 this.ViewModel.Message += " " + message;
             }
+
+            this.MessageTextBox.Focus();
 
             // Put caret at the end.
             this.MessageTextBox.SelectionStart = this.MessageTextBox.Text.Length;
