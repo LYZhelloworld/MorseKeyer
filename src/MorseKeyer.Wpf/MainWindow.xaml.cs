@@ -156,7 +156,7 @@ namespace MorseKeyer.Wpf
 
                 this.waveOutEvent = new()
                 {
-                    DeviceNumber = this.OutputDeviceComboBox.SelectedItem is ItemWithDescription<int> item ? item.Value : -1,
+                    DeviceNumber = this.OutputDeviceComboBox.SelectedItem is KeyValuePair<int, string> item ? item.Key : -1,
                 };
                 this.waveOutEvent.Init(provider);
 
@@ -164,7 +164,7 @@ namespace MorseKeyer.Wpf
                 {
                     this.secondaryWaveOutEvent = new()
                     {
-                        DeviceNumber = this.SecondaryOutputDeviceComboBox.SelectedItem is ItemWithDescription<int> secondaryItem ? secondaryItem.Value : -1,
+                        DeviceNumber = this.SecondaryOutputDeviceComboBox.SelectedItem is KeyValuePair<int, string> secondaryItem ? secondaryItem.Key : -1,
                     };
                     this.secondaryWaveOutEvent.Init(provider);
                 }
@@ -201,9 +201,7 @@ namespace MorseKeyer.Wpf
         private void RefreshOutputDevices()
         {
             this.ViewModel.OutputDevices = DeviceNameHelper.GetOutputDevices()
-                .Prepend(KeyValuePair.Create(-1, MainWindowStrings.DeviceNameDefault)) // Prepend default device.
-                .OrderBy(x => x.Key)
-                .Select(x => new ItemWithDescription<int>(x.Key, x.Value));
+                .Prepend(KeyValuePair.Create(-1, MainWindowStrings.DeviceNameDefault)); // Prepend default device.
             this.OutputDeviceComboBox.SelectedIndex = 0;
             this.SecondaryOutputDeviceComboBox.SelectedIndex = 0;
         }
@@ -253,9 +251,9 @@ namespace MorseKeyer.Wpf
         {
             if (sender is ComboBox comboBox)
             {
-                if (comboBox.SelectedItem is ItemWithDescription<string> item)
+                if (comboBox.SelectedItem is KeyValuePair<string, string> item)
                 {
-                    this.AppendMessage(item.Value);
+                    this.AppendMessage(item.Key);
                 }
 
                 comboBox.SelectedIndex = -1;

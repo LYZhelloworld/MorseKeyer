@@ -20,7 +20,7 @@ namespace MorseKeyer.Wpf
     /// </summary>
     internal class MainViewModel : INotifyPropertyChanged
     {
-        private static readonly IEnumerable<ItemWithDescription<string>> ProsignsValue = new List<ItemWithDescription<string>>
+        private static readonly IEnumerable<KeyValuePair<string, string>> ProsignsValue = new List<KeyValuePair<string, string>>
         {
             new("R", ProsignStrings.R),
             new("K", ProsignStrings.K),
@@ -38,7 +38,7 @@ namespace MorseKeyer.Wpf
             new("<BK>", ProsignStrings.BK),
         }.OrderBy(x => x.Value);
 
-        private static readonly IEnumerable<ItemWithDescription<string>> QCodesValue = new List<ItemWithDescription<string>>
+        private static readonly IEnumerable<KeyValuePair<string, string>> QCodesValue = new List<KeyValuePair<string, string>>
         {
             new("QRA", QCodeStrings.QRA),
             new("QRL", QCodeStrings.QRL),
@@ -80,7 +80,7 @@ namespace MorseKeyer.Wpf
         private int frequency = 700;
         private int wpm = 25;
         private bool isSending;
-        private ObservableCollection<ItemWithDescription<int>> outputDevices = new();
+        private ObservableCollection<KeyValuePair<int, string>> outputDevices = new();
         private bool isSecondaryOutputDeviceEnabled;
 
         /// <inheritdoc/>
@@ -89,12 +89,12 @@ namespace MorseKeyer.Wpf
         /// <summary>
         /// Gets the prosigns used in morse code.
         /// </summary>
-        public static IEnumerable<ItemWithDescription<string>> Prosigns => ProsignsValue;
+        public static IEnumerable<KeyValuePair<string, string>> Prosigns => ProsignsValue;
 
         /// <summary>
         /// Gets the Q-codes used in morse code.
         /// </summary>
-        public static IEnumerable<ItemWithDescription<string>> QCodes => QCodesValue;
+        public static IEnumerable<KeyValuePair<string, string>> QCodes => QCodesValue;
 
         /// <summary>
         /// Gets or sets the message to send.
@@ -236,10 +236,10 @@ namespace MorseKeyer.Wpf
         /// <summary>
         /// Gets or sets output devices.
         /// </summary>
-        public IEnumerable<ItemWithDescription<int>> OutputDevices
+        public IEnumerable<KeyValuePair<int, string>> OutputDevices
         {
             get => this.outputDevices;
-            set => this.SetProperty(ref this.outputDevices, new ObservableCollection<ItemWithDescription<int>>(value));
+            set => this.SetProperty(ref this.outputDevices, new ObservableCollection<KeyValuePair<int, string>>(value));
         }
 
         /// <summary>

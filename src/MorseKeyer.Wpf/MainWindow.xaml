@@ -60,9 +60,9 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Path=Value}"/>
+                                            <TextBlock Text="{Binding Path=Key}"/>
                                             <TextBlock Text=" - "/>
-                                            <TextBlock Text="{Binding Path=Description}"/>
+                                            <TextBlock Text="{Binding Path=Value}"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -74,9 +74,9 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Path=Value}"/>
+                                            <TextBlock Text="{Binding Path=Key}"/>
                                             <TextBlock Text=" - "/>
-                                            <TextBlock Text="{Binding Path=Description}"/>
+                                            <TextBlock Text="{Binding Path=Value}"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -93,7 +93,7 @@
                     <ComboBox x:Name="OutputDeviceComboBox" ItemsSource="{Binding Path=OutputDevices}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=Description}"/>
+                                <TextBlock Text="{Binding Path=Value}"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ComboBox>
@@ -101,7 +101,7 @@
                     <ComboBox x:Name="SecondaryOutputDeviceComboBox" Margin="0,0,0,5" ItemsSource="{Binding Path=OutputDevices}" IsEnabled="{Binding Path=IsSecondaryOutputDeviceEnabled}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=Description}"/>
+                                <TextBlock Text="{Binding Path=Value}"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ComboBox>
