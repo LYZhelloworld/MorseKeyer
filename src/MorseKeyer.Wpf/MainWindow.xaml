@@ -90,7 +90,7 @@
                 </StackPanel>
                 <StackPanel Grid.Column="1">
                     <Label Content="{x:Static r:MainWindowStrings.LabelOutputDevice}" Target="{Binding ElementName=OutputDeviceComboBox}"/>
-                    <ComboBox x:Name="OutputDeviceComboBox" ItemsSource="{Binding Path=OutputDevices}">
+                    <ComboBox x:Name="OutputDeviceComboBox" ItemsSource="{Binding Path=OutputDevices}" DropDownOpened="OutputDeviceComboBox_DropDownOpened">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Value}"/>
@@ -98,14 +98,13 @@
                         </ItemsControl.ItemTemplate>
                     </ComboBox>
                     <CheckBox Content="{x:Static r:MainWindowStrings.LabelSecondaryOutputDevice}" Margin="0,5,0,0" IsChecked="{Binding Path=IsSecondaryOutputDeviceEnabled}"/>
-                    <ComboBox x:Name="SecondaryOutputDeviceComboBox" Margin="0,0,0,5" ItemsSource="{Binding Path=OutputDevices}" IsEnabled="{Binding Path=IsSecondaryOutputDeviceEnabled}">
+                    <ComboBox x:Name="SecondaryOutputDeviceComboBox" Margin="0,0,0,5" ItemsSource="{Binding Path=OutputDevices}" IsEnabled="{Binding Path=IsSecondaryOutputDeviceEnabled}" DropDownOpened="OutputDeviceComboBox_DropDownOpened">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Value}"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ComboBox>
-                    <Button x:Name="RefreshOutputDeviceButton" Content="{x:Static r:MainWindowStrings.ButtonRefreshOutputDevice}" HorizontalAlignment="Right" Padding="20,1,20,1" Click="RefreshOutputDeviceButton_Click"/>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>

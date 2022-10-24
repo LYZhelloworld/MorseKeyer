@@ -154,17 +154,32 @@ namespace MorseKeyer.Wpf
                 this.waveOutEvent?.Stop();
                 this.secondaryWaveOutEvent?.Stop();
 
+                var numberOfDevices = WaveOut.DeviceCount;
+                var deviceNumber = this.OutputDeviceComboBox.SelectedItem is KeyValuePair<int, string> item ? item.Key : -1;
+                if (deviceNumber >= numberOfDevices)
+                {
+                    deviceNumber = -1;
+                    this.OutputDeviceComboBox.SelectedIndex = 0;
+                }
+
                 this.waveOutEvent = new()
                 {
-                    DeviceNumber = this.OutputDeviceComboBox.SelectedItem is KeyValuePair<int, string> item ? item.Key : -1,
+                    DeviceNumber = deviceNumber,
                 };
                 this.waveOutEvent.Init(provider);
 
                 if (this.ViewModel.IsSecondaryOutputDeviceEnabled)
                 {
+                    var secondaryDeviceNumber = this.SecondaryOutputDeviceComboBox.SelectedItem is KeyValuePair<int, string> secondaryItem ? secondaryItem.Key : -1;
+                    if (secondaryDeviceNumber >= numberOfDevices)
+                    {
+                        secondaryDeviceNumber = -1;
+                        this.SecondaryOutputDeviceComboBox.SelectedIndex = 0;
+                    }
+
                     this.secondaryWaveOutEvent = new()
                     {
-                        DeviceNumber = this.SecondaryOutputDeviceComboBox.SelectedItem is KeyValuePair<int, string> secondaryItem ? secondaryItem.Key : -1,
+                        DeviceNumber = secondaryDeviceNumber,
                     };
                     this.secondaryWaveOutEvent.Init(provider);
                 }
@@ -202,8 +217,17 @@ namespace MorseKeyer.Wpf
         {
             this.ViewModel.OutputDevices = DeviceNameHelper.GetOutputDevices()
                 .Prepend(KeyValuePair.Create(-1, MainWindowStrings.DeviceNameDefault)); // Prepend default device.
-            this.OutputDeviceComboBox.SelectedIndex = 0;
-            this.SecondaryOutputDeviceComboBox.SelectedIndex = 0;
+
+            // Use ">" here because there is another item "Default" in the list.
+            if (this.OutputDeviceComboBox.SelectedIndex == -1 || this.OutputDeviceComboBox.SelectedIndex > this.ViewModel.OutputDevices.Count())
+            {
+                this.OutputDeviceComboBox.SelectedIndex = 0;
+            }
+
+            if (this.SecondaryOutputDeviceComboBox.SelectedIndex == -1 || this.SecondaryOutputDeviceComboBox.SelectedIndex > this.ViewModel.OutputDevices.Count())
+            {
+                this.SecondaryOutputDeviceComboBox.SelectedIndex = 0;
+            }
         }
 
         private void MessageTemplateButton_Click(object sender, RoutedEventArgs e)
@@ -280,7 +304,7 @@ namespace MorseKeyer.Wpf
             e.CanExecute = this.waveOutEvent != null;
         }
 
-        private void RefreshOutputDeviceButton_Click(object sender, RoutedEventArgs e)
+        private void OutputDeviceComboBox_DropDownOpened(object sender, EventArgs e)
         {
             this.RefreshOutputDevices();
         }
