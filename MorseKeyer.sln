@@ -32,7 +32,7 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MorseKeyer.MsiPackage", "sr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "setup", "setup", "{AAD6B125-6BFF-48FE-8483-CA25D2E45467}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorseKeyer.Resources", "src\MorseKeyer.Resources\MorseKeyer.Resources.csproj", "{C235A7EC-5D98-4A42-A8BD-3F71E9170ECF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseKeyer.Resources", "src\MorseKeyer.Resources\MorseKeyer.Resources.csproj", "{C235A7EC-5D98-4A42-A8BD-3F71E9170ECF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

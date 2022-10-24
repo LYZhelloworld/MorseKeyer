@@ -8,21 +8,15 @@ namespace MorseKeyer.Wpf.DataStructures
     /// <summary>
     /// Item for combo box with description.
     /// </summary>
-    internal record ItemWithDescription
+    /// <typeparam name="T">The type of the value.</typeparam>
+    internal record ItemWithDescription<T>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ItemWithDescription"/> class.
-        /// </summary>
-        public ItemWithDescription()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ItemWithDescription"/> class.
+        /// Initializes a new instance of the <see cref="ItemWithDescription{T}"/> class.
         /// </summary>
         /// <param name="value">The value of the item.</param>
         /// <param name="description">The description of the item.</param>
-        public ItemWithDescription(string value, string description)
+        public ItemWithDescription(T value, string description)
         {
             this.Value = value;
             this.Description = description;
@@ -31,7 +25,7 @@ namespace MorseKeyer.Wpf.DataStructures
         /// <summary>
         /// Gets or sets the value of the item.
         /// </summary>
-        public string Value { get; set; } = string.Empty;
+        public T Value { get; set; }
 
         /// <summary>
         /// Gets or sets the description of the item.

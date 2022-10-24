@@ -6,6 +6,7 @@
 namespace MorseKeyer.Wpf
 {
     using System;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -30,6 +31,11 @@ namespace MorseKeyer.Wpf
         private WaveOutEvent? waveOutEvent;
 
         /// <summary>
+        /// The event for playing morse code on secondary device.
+        /// </summary>
+        private WaveOutEvent? secondaryWaveOutEvent;
+
+        /// <summary>
         /// A value that indicates whether the playback event has been cancelled.
         /// When cancelling the event, the message textbox will not be cleared.
         /// </summary>
@@ -41,6 +47,7 @@ namespace MorseKeyer.Wpf
         public MainWindow()
         {
             this.InitializeComponent();
+            this.Loaded += (sender, e) => this.RefreshOutputDevices();
         }
 
         /// <summary>
@@ -143,8 +150,23 @@ namespace MorseKeyer.Wpf
                 });
 
                 this.waveOutEvent?.Stop();
-                this.waveOutEvent = new();
+                this.secondaryWaveOutEvent?.Stop();
+
+                this.waveOutEvent = new()
+                {
+                    DeviceNumber = this.OutputDeviceComboBox.SelectedItem is ItemWithDescription<int> item ? item.Value : -1,
+                };
                 this.waveOutEvent.Init(provider);
+
+                if (this.ViewModel.IsSecondaryOutputDeviceEnabled)
+                {
+                    this.secondaryWaveOutEvent = new()
+                    {
+                        DeviceNumber = this.SecondaryOutputDeviceComboBox.SelectedItem is ItemWithDescription<int> secondaryItem ? secondaryItem.Value : -1,
+                    };
+                    this.secondaryWaveOutEvent.Init(provider);
+                }
+
                 this.isCancelled = false;
 
                 this.waveOutEvent.PlaybackStopped += (sender, e) =>
@@ -169,6 +191,16 @@ namespace MorseKeyer.Wpf
                 MessageBox.Show(MainWindowStrings.InvalidCharacterError, MainWindowStrings.WindowTitle, MessageBoxButton.OK, MessageBoxImage.Error);
                 this.ViewModel.IsSending = false;
             }
+        }
+
+        /// <summary>
+        /// Refreshes the list of output devices.
+        /// </summary>
+        private void RefreshOutputDevices()
+        {
+            this.ViewModel.OutputDevices = Enumerable.Range(0, WaveOut.DeviceCount).Prepend(-1).Select(i => new ItemWithDescription<int>(i, i == -1 ? MainWindowStrings.DeviceNameDefault : WaveOut.GetCapabilities(i).ProductName));
+            this.OutputDeviceComboBox.SelectedIndex = 0;
+            this.SecondaryOutputDeviceComboBox.SelectedIndex = 0;
         }
 
         private void MessageTemplateButton_Click(object sender, RoutedEventArgs e)
@@ -216,7 +248,7 @@ namespace MorseKeyer.Wpf
         {
             if (sender is ComboBox comboBox)
             {
-                if (comboBox.SelectedItem is ItemWithDescription item)
+                if (comboBox.SelectedItem is ItemWithDescription<string> item)
                 {
                     this.AppendMessage(item.Value);
                 }
@@ -237,11 +269,17 @@ namespace MorseKeyer.Wpf
         {
             this.isCancelled = true;
             this.waveOutEvent?.Stop();
+            this.secondaryWaveOutEvent?.Stop();
         }
 
         private void StopPlayingCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = this.waveOutEvent != null;
+        }
+
+        private void RefreshOutputDeviceButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.RefreshOutputDevices();
         }
     }
 }
