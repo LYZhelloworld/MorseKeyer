@@ -13,6 +13,7 @@ namespace MorseKeyer.SignalGenerator.FunctionalTest
     /// Tests <see cref="MorseGenerator"/>.
     /// </summary>
     [TestClass]
+    [TestCategory("FunctionalTest")]
     [Ignore]
     public class TestMorseGenerator
     {
@@ -21,9 +22,9 @@ namespace MorseKeyer.SignalGenerator.FunctionalTest
         /// </summary>
         /// <param name="message">The message to test.</param>
         [DataTestMethod]
-        [DataRow("CQ CQ CQ DE BA1ZZZ BA1ZZZ BA1ZZZ PSE K")]
-        [DataRow("BA1ZZZ DE BA1YYY BA1YYY BA1YYY UR RST 599 5NN MY RST HW? K")]
-        [DataRow("BA1ZZZ DE BA1YYY THX FER UR QSO ES RST RPRT 73 <SK> E E")]
+        [DataRow("CQ CQ CQ")]
+        [DataRow("UR RST 599 5NN")]
+        [DataRow("73 <SK> E E")]
         public void TestSampleMessages(string message)
         {
             using var signalWaveOutEvent = new WaveOutEvent();

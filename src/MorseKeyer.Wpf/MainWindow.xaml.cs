@@ -6,6 +6,7 @@
 namespace MorseKeyer.Wpf
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
@@ -13,6 +14,7 @@ namespace MorseKeyer.Wpf
     using MorseKeyer.Resources;
     using MorseKeyer.SignalGenerator;
     using MorseKeyer.Wpf.DataStructures;
+    using MorseKeyer.Wpf.Helpers;
     using NAudio.Wave;
 
     /// <summary>
@@ -198,36 +200,10 @@ namespace MorseKeyer.Wpf
         /// </summary>
         private void RefreshOutputDevices()
         {
-            this.ViewModel.OutputDevices = Enumerable.Range(0, WaveOut.DeviceCount)
-                .Prepend(-1)
-                .Select(i =>
-                {
-                    if (i == -1)
-                    {
-                        return new ItemWithDescription<int>(i, MainWindowStrings.DeviceNameDefault);
-                    }
-                    else
-                    {
-                        var productName = WaveOut.GetCapabilities(i).ProductName;
-
-                        /*
-                         * From the doc of NAudio:
-                         * "Also note that the ProductName retured is limited to 32 characters, resulting in it often being truncated.
-                         * This is a limitation of the underlying Windows API and there is unfortunately no easy way to fix it in NAudio."
-                         *
-                         * See also: https://github.com/naudio/NAudio/blob/master/Docs/EnumerateOutputDevices.md
-                         *
-                         * Further investigation shows that the productName will be truncated with only 31 characters.
-                         * We will show a "..." here if productName reaches 31 characters.
-                         */
-                        if (productName.Length >= 31)
-                        {
-                            productName += "...";
-                        }
-
-                        return new ItemWithDescription<int>(i, productName);
-                    }
-                });
+            this.ViewModel.OutputDevices = DeviceNameHelper.GetOutputDevices()
+                .Prepend(KeyValuePair.Create(-1, MainWindowStrings.DeviceNameDefault)) // Prepend default device.
+                .OrderBy(x => x.Key)
+                .Select(x => new ItemWithDescription<int>(x.Key, x.Value));
             this.OutputDeviceComboBox.SelectedIndex = 0;
             this.SecondaryOutputDeviceComboBox.SelectedIndex = 0;
         }

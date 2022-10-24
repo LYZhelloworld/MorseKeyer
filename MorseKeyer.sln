@@ -34,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "setup", "setup", "{AAD6B125
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseKeyer.Resources", "src\MorseKeyer.Resources\MorseKeyer.Resources.csproj", "{C235A7EC-5D98-4A42-A8BD-3F71E9170ECF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorseKeyer.Wpf.FunctionalTest", "test\MorseKeyer.Wpf.FunctionalTest\MorseKeyer.Wpf.FunctionalTest.csproj", "{7B959A69-F71A-4CA2-AC4E-062D57B60E9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{C235A7EC-5D98-4A42-A8BD-3F71E9170ECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C235A7EC-5D98-4A42-A8BD-3F71E9170ECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C235A7EC-5D98-4A42-A8BD-3F71E9170ECF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B959A69-F71A-4CA2-AC4E-062D57B60E9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B959A69-F71A-4CA2-AC4E-062D57B60E9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B959A69-F71A-4CA2-AC4E-062D57B60E9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B959A69-F71A-4CA2-AC4E-062D57B60E9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +79,7 @@ Global
 		{9BB4EB1E-B6D8-4B47-9675-5681BEDEE2B4} = {6D585E8C-EF0A-4256-96B2-6084636129EA}
 		{FF07304A-077D-4E42-974E-BC167D597EEF} = {AAD6B125-6BFF-48FE-8483-CA25D2E45467}
 		{C235A7EC-5D98-4A42-A8BD-3F71E9170ECF} = {11400C17-9341-4D5D-9799-1F52A43DA292}
+		{7B959A69-F71A-4CA2-AC4E-062D57B60E9F} = {6D585E8C-EF0A-4256-96B2-6084636129EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F9A3AF0-A6C6-48C6-B474-63CBF14CB2E4}

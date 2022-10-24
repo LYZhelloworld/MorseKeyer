@@ -5,6 +5,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using System.Windows;
 
 [assembly: ThemeInfo(
@@ -13,3 +14,4 @@ using System.Windows;
 ]
 [assembly: CLSCompliant(true)]
 [assembly: ExcludeFromCodeCoverage]
+[assembly: InternalsVisibleTo("MorseKeyer.Wpf.FunctionalTest")]
