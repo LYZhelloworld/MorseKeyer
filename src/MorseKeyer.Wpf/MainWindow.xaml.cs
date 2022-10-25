@@ -11,9 +11,9 @@ namespace MorseKeyer.Wpf
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
+    using MorseKeyer.Configuration.DataStructures;
     using MorseKeyer.Resources;
     using MorseKeyer.SignalGenerator;
-    using MorseKeyer.Wpf.DataStructures;
     using MorseKeyer.Wpf.Helpers;
     using NAudio.Wave;
 
@@ -49,7 +49,15 @@ namespace MorseKeyer.Wpf
         public MainWindow()
         {
             this.InitializeComponent();
-            this.Loaded += (sender, e) => this.RefreshOutputDevices();
+            this.Loaded += (sender, e) =>
+            {
+                this.DataContext = new MainViewModel();
+                this.RefreshOutputDevices();
+            };
+            this.Closed += (sender, e) =>
+            {
+                this.ViewModel.SaveConfig();
+            };
         }
 
         /// <summary>
@@ -250,11 +258,11 @@ namespace MorseKeyer.Wpf
         private void MessageTemplateButton_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button button
-                && button.DataContext is MessageTemplate messageTemplate)
+                && button.DataContext is MessageTemplateData messageTemplate)
             {
                 var message = messageTemplate.Message
-                    .Replace(MessageTemplate.MyCallsignPlaceholder, this.ViewModel.MyCallsign, StringComparison.OrdinalIgnoreCase)
-                    .Replace(MessageTemplate.TheirCallsignPlaceholder, this.ViewModel.TheirCallsign, StringComparison.OrdinalIgnoreCase);
+                    .Replace(MessageTemplateData.MyCallsignPlaceholder, this.ViewModel.MyCallsign, StringComparison.OrdinalIgnoreCase)
+                    .Replace(MessageTemplateData.TheirCallsignPlaceholder, this.ViewModel.TheirCallsign, StringComparison.OrdinalIgnoreCase);
                 if (messageTemplate.IsAppend)
                 {
                     this.AppendMessage(message, messageTemplate.RequireMyCallsign, messageTemplate.RequireTheirCallsign);
@@ -269,7 +277,7 @@ namespace MorseKeyer.Wpf
         private void MessageTemplateButton_RightClick(object sender, MouseButtonEventArgs e)
         {
             if (sender is Button button
-                && button.DataContext is MessageTemplate messageTemplate)
+                && button.DataContext is MessageTemplateData messageTemplate)
             {
                 var templateSettingsDialog = new TemplateSettingsDialog()
                 {
@@ -283,7 +291,14 @@ namespace MorseKeyer.Wpf
 
                 if (result)
                 {
-                    button.DataContext = ((TemplateSettingsDialogViewModel)templateSettingsDialog.DataContext).MessageTemplate;
+                    var index = this.ViewModel.MessageTemplates.IndexOf(messageTemplate);
+                    if (index != -1)
+                    {
+                        button.DataContext = ((TemplateSettingsDialogViewModel)templateSettingsDialog.DataContext).MessageTemplate;
+
+                        // Since the data context of the button is an item of the collection, we need to refresh it manually.
+                        button.GetBindingExpression(ContentProperty)?.UpdateTarget();
+                    }
                 }
             }
         }

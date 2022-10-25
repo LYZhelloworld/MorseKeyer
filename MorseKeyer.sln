@@ -36,6 +36,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseKeyer.Resources", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseKeyer.Wpf.FunctionalTest", "test\MorseKeyer.Wpf.FunctionalTest\MorseKeyer.Wpf.FunctionalTest.csproj", "{7B959A69-F71A-4CA2-AC4E-062D57B60E9F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseKeyer.Configuration", "src\MorseKeyer.Configuration\MorseKeyer.Configuration.csproj", "{ECD812DF-016B-4934-9F27-B086E48C15E0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseKeyer.Configuration.Test", "test\MorseKeyer.Configuration.Test\MorseKeyer.Configuration.Test.csproj", "{DAE909AB-EFFB-42A1-885F-9B2E2BD2567C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +72,14 @@ Global
 		{7B959A69-F71A-4CA2-AC4E-062D57B60E9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B959A69-F71A-4CA2-AC4E-062D57B60E9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B959A69-F71A-4CA2-AC4E-062D57B60E9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECD812DF-016B-4934-9F27-B086E48C15E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECD812DF-016B-4934-9F27-B086E48C15E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECD812DF-016B-4934-9F27-B086E48C15E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECD812DF-016B-4934-9F27-B086E48C15E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAE909AB-EFFB-42A1-885F-9B2E2BD2567C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAE909AB-EFFB-42A1-885F-9B2E2BD2567C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAE909AB-EFFB-42A1-885F-9B2E2BD2567C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAE909AB-EFFB-42A1-885F-9B2E2BD2567C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +92,8 @@ Global
 		{FF07304A-077D-4E42-974E-BC167D597EEF} = {AAD6B125-6BFF-48FE-8483-CA25D2E45467}
 		{C235A7EC-5D98-4A42-A8BD-3F71E9170ECF} = {11400C17-9341-4D5D-9799-1F52A43DA292}
 		{7B959A69-F71A-4CA2-AC4E-062D57B60E9F} = {6D585E8C-EF0A-4256-96B2-6084636129EA}
+		{ECD812DF-016B-4934-9F27-B086E48C15E0} = {11400C17-9341-4D5D-9799-1F52A43DA292}
+		{DAE909AB-EFFB-42A1-885F-9B2E2BD2567C} = {6D585E8C-EF0A-4256-96B2-6084636129EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F9A3AF0-A6C6-48C6-B474-63CBF14CB2E4}

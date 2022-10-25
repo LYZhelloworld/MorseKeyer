@@ -7,14 +7,14 @@ namespace MorseKeyer.Wpf
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
-    using MorseKeyer.Wpf.DataStructures;
+    using MorseKeyer.Configuration.DataStructures;
 
     /// <summary>
     /// The view model for <see cref="TemplateSettingsDialog"/>.
     /// </summary>
     public class TemplateSettingsDialogViewModel : INotifyPropertyChanged
     {
-        private MessageTemplate messageTemplate = new();
+        private MessageTemplateData messageTemplate = new();
 
         /// <inheritdoc/>
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -22,13 +22,13 @@ namespace MorseKeyer.Wpf
         /// <summary>
         /// Gets or sets the message template.
         /// </summary>
-        public MessageTemplate MessageTemplate
+        public MessageTemplateData MessageTemplate
         {
             get => this.messageTemplate;
             set => this.SetProperty(ref this.messageTemplate, value);
         }
 
-        /// <inheritdoc cref="MessageTemplate.DisplayName"/>
+        /// <inheritdoc cref="MessageTemplateData.DisplayName"/>
         public string DisplayName
         {
             get => this.MessageTemplate.DisplayName;
@@ -42,7 +42,7 @@ namespace MorseKeyer.Wpf
             }
         }
 
-        /// <inheritdoc cref="MessageTemplate.Message"/>
+        /// <inheritdoc cref="MessageTemplateData.Message"/>
         public string Message
         {
             get => this.MessageTemplate.Message;
@@ -56,7 +56,7 @@ namespace MorseKeyer.Wpf
             }
         }
 
-        /// <inheritdoc cref="MessageTemplate.IsAppend"/>
+        /// <inheritdoc cref="MessageTemplateData.IsAppend"/>
         public bool IsAppend
         {
             get => this.MessageTemplate.IsAppend;

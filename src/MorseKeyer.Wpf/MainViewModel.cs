@@ -5,15 +5,16 @@
 
 namespace MorseKeyer.Wpf
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Globalization;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using MorseKeyer.Configuration;
+    using MorseKeyer.Configuration.DataStructures;
     using MorseKeyer.Resources;
-    using MorseKeyer.Wpf.DataStructures;
-    using NAudio.Wave;
 
     /// <summary>
     /// The view model for <see cref="MainWindow"/>.
@@ -57,31 +58,40 @@ namespace MorseKeyer.Wpf
             new("QTH", QCodeStrings.QTH),
         };
 
-        /// <summary>
-        /// The default value of message templates.
-        /// </summary>
-        private static readonly MessageTemplate[] DefaultMessageTemplates = new MessageTemplate[8]
-        {
-            new("CQ", "CQ CQ CQ DE {TX} {TX} {TX} K"),
-            new("QRZ?", "QRZ? DE {TX} K"),
-            new("RST", "{RX} DE {TX} UR RST 599 5NN"),
-            new("{TX}", "{TX}", true),
-            new("{RX}", "{RX}", true),
-            new("73", "73", true),
-            new("?", "?", true),
-            new("NIL", "NIL", true),
-        };
+        private readonly Config config = new();
+
+        private ObservableCollection<MessageTemplateData> messageTemplates;
 
         private string message = string.Empty;
-        private ObservableCollection<MessageTemplate> messageTemplates = new(DefaultMessageTemplates);
-        private string myCallsign = string.Empty;
+
+        private string myCallsign;
+
         private string theirCallsign = string.Empty;
-        private double gain = 0.5;
-        private int frequency = 700;
-        private int wpm = 25;
+
+        private double gain;
+
+        private int frequency;
+
+        private int wpm;
+
         private bool isSending;
+
         private ObservableCollection<KeyValuePair<int, string>> outputDevices = new();
+
         private bool isSecondaryOutputDeviceEnabled;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainViewModel"/> class.
+        /// </summary>
+        public MainViewModel()
+        {
+            var configData = this.config.Load();
+            this.messageTemplates = new(configData.MessageTemplates);
+            this.myCallsign = configData.MyCallsign;
+            this.gain = configData.Gain;
+            this.frequency = configData.Frequency;
+            this.wpm = configData.Wpm;
+        }
 
         /// <inheritdoc/>
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -97,6 +107,11 @@ namespace MorseKeyer.Wpf
         public static IEnumerable<KeyValuePair<string, string>> QCodes => QCodesValue;
 
         /// <summary>
+        /// Gets the configuration manager.
+        /// </summary>
+        public Config Config => this.config;
+
+        /// <summary>
         /// Gets or sets the message to send.
         /// </summary>
         public string Message
@@ -108,10 +123,10 @@ namespace MorseKeyer.Wpf
         /// <summary>
         /// Gets or sets the message templates.
         /// </summary>
-        public IEnumerable<MessageTemplate> MessageTemplates
+        public ObservableCollection<MessageTemplateData> MessageTemplates
         {
             get => this.messageTemplates;
-            set => this.SetProperty(ref this.messageTemplates, new ObservableCollection<MessageTemplate>(value));
+            set => this.SetProperty(ref this.messageTemplates, value);
         }
 
         /// <summary>
@@ -149,9 +164,7 @@ namespace MorseKeyer.Wpf
             get => this.Gain.ToString(CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var gain)
-                    && gain >= 0
-                    && gain <= 1)
+                if (double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var gain))
                 {
                     this.Gain = gain;
                 }
@@ -172,12 +185,10 @@ namespace MorseKeyer.Wpf
         /// </summary>
         public string FrequencyText
         {
-            get => this.frequency.ToString(CultureInfo.InvariantCulture);
+            get => this.Frequency.ToString(CultureInfo.InvariantCulture);
             set
             {
-                if (int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var frequency)
-                    && frequency >= 300
-                    && frequency <= 900)
+                if (int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var frequency))
                 {
                     this.Frequency = frequency;
                 }
@@ -198,12 +209,10 @@ namespace MorseKeyer.Wpf
         /// </summary>
         public string WpmText
         {
-            get => this.wpm.ToString(CultureInfo.InvariantCulture);
+            get => this.Wpm.ToString(CultureInfo.InvariantCulture);
             set
             {
-                if (int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var wpm)
-                    && wpm >= 5
-                    && wpm <= 50)
+                if (int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var wpm))
                 {
                     this.Wpm = wpm;
                 }
@@ -220,7 +229,7 @@ namespace MorseKeyer.Wpf
             {
                 if (this.SetProperty(ref this.isSending, value))
                 {
-                    this.PropertyChanged?.Invoke(this, new(nameof(this.IsMessageControlsEnabled)));
+                    this.OnPropertyChanged(nameof(this.IsMessageControlsEnabled));
                 }
             }
         }
@@ -252,6 +261,22 @@ namespace MorseKeyer.Wpf
         }
 
         /// <summary>
+        /// Saves config to config file.
+        /// </summary>
+        public void SaveConfig()
+        {
+            var configData = new ConfigData
+            {
+                MessageTemplates = this.messageTemplates.ToArray(),
+                MyCallsign = this.myCallsign,
+                Gain = this.gain,
+                Frequency = this.frequency,
+                Wpm = this.wpm,
+            };
+            this.config.Save(configData);
+        }
+
+        /// <summary>
         /// Sets a property.
         /// </summary>
         /// <typeparam name="T">The type of the field.</typeparam>
@@ -264,11 +289,20 @@ namespace MorseKeyer.Wpf
             if (!Equals(field, newValue))
             {
                 field = newValue;
-                this.PropertyChanged?.Invoke(this, new(propertyName));
+                this.OnPropertyChanged(propertyName);
                 return true;
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Invokes <see cref="PropertyChanged"/> event.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            this.PropertyChanged?.Invoke(this, new(propertyName));
         }
     }
 }
