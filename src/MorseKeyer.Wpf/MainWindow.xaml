@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MorseKeyer.Wpf"
-        xmlns:dc="clr-namespace:MorseKeyer.Wpf.DataStructures"
+        xmlns:dc="clr-namespace:MorseKeyer.Configuration.DataStructures;assembly=MorseKeyer.Configuration"
         xmlns:r="clr-namespace:MorseKeyer.Resources;assembly=MorseKeyer.Resources"
         mc:Ignorable="d"
         Title="{x:Static r:MainWindowStrings.WindowTitle}" Height="Auto" Width="600" ResizeMode="NoResize"
@@ -29,7 +29,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Margin="0,0,10,0">
-                    <Grid>
+                    <Grid DataContext="{Binding Path=MessageTemplates}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -40,14 +40,14 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Row="0" Grid.Column="0" Margin="0,0,5,5" Content="{Binding Path=DisplayName}" d:Content="0" DataContext="{Binding Path=MessageTemplates[0]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplate}" Click="MessageTemplateButton_Click" MouseRightButtonDown="MessageTemplateButton_RightClick"/>
-                        <Button Grid.Row="0" Grid.Column="1" Margin="0,0,5,5" Content="{Binding Path=DisplayName}" d:Content="1" DataContext="{Binding Path=MessageTemplates[1]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplate}" Click="MessageTemplateButton_Click" MouseRightButtonDown="MessageTemplateButton_RightClick"/>
-                        <Button Grid.Row="0" Grid.Column="2" Margin="0,0,5,5" Content="{Binding Path=DisplayName}" d:Content="2" DataContext="{Binding Path=MessageTemplates[2]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplate}" Click="MessageTemplateButton_Click" MouseRightButtonDown="MessageTemplateButton_RightClick"/>
-                        <Button Grid.Row="0" Grid.Column="3" Margin="0,0,5,5" Content="{Binding Path=DisplayName}" d:Content="3" DataContext="{Binding Path=MessageTemplates[3]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplate}" Click="MessageTemplateButton_Click" MouseRightButtonDown="MessageTemplateButton_RightClick"/>
-                        <Button Grid.Row="1" Grid.Column="0" Margin="0,0,5,0" Content="{Binding Path=DisplayName}" d:Content="4" DataContext="{Binding Path=MessageTemplates[4]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplate}" Click="MessageTemplateButton_Click" MouseRightButtonDown="MessageTemplateButton_RightClick"/>
-                        <Button Grid.Row="1" Grid.Column="1" Margin="0,0,5,0" Content="{Binding Path=DisplayName}" d:Content="5" DataContext="{Binding Path=MessageTemplates[5]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplate}" Click="MessageTemplateButton_Click" MouseRightButtonDown="MessageTemplateButton_RightClick"/>
-                        <Button Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" Content="{Binding Path=DisplayName}" d:Content="6" DataContext="{Binding Path=MessageTemplates[6]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplate}" Click="MessageTemplateButton_Click" MouseRightButtonDown="MessageTemplateButton_RightClick"/>
-                        <Button Grid.Row="1" Grid.Column="3" Margin="0,0,5,0" Content="{Binding Path=DisplayName}" d:Content="7" DataContext="{Binding Path=MessageTemplates[7]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplate}" Click="MessageTemplateButton_Click" MouseRightButtonDown="MessageTemplateButton_RightClick"/>
+                        <Button Grid.Row="0" Grid.Column="0" Margin="0,0,5,5" Content="{Binding Path=DisplayName}" d:Content="0" DataContext="{Binding Path=[0]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplateData}" Click="MessageTemplateButton_Click" MouseRightButtonUp="MessageTemplateButton_RightClick"/>
+                        <Button Grid.Row="0" Grid.Column="1" Margin="0,0,5,5" Content="{Binding Path=DisplayName}" d:Content="1" DataContext="{Binding Path=[1]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplateData}" Click="MessageTemplateButton_Click" MouseRightButtonUp="MessageTemplateButton_RightClick"/>
+                        <Button Grid.Row="0" Grid.Column="2" Margin="0,0,5,5" Content="{Binding Path=DisplayName}" d:Content="2" DataContext="{Binding Path=[2]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplateData}" Click="MessageTemplateButton_Click" MouseRightButtonUp="MessageTemplateButton_RightClick"/>
+                        <Button Grid.Row="0" Grid.Column="3" Margin="0,0,5,5" Content="{Binding Path=DisplayName}" d:Content="3" DataContext="{Binding Path=[3]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplateData}" Click="MessageTemplateButton_Click" MouseRightButtonUp="MessageTemplateButton_RightClick"/>
+                        <Button Grid.Row="1" Grid.Column="0" Margin="0,0,5,0" Content="{Binding Path=DisplayName}" d:Content="4" DataContext="{Binding Path=[4]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplateData}" Click="MessageTemplateButton_Click" MouseRightButtonUp="MessageTemplateButton_RightClick"/>
+                        <Button Grid.Row="1" Grid.Column="1" Margin="0,0,5,0" Content="{Binding Path=DisplayName}" d:Content="5" DataContext="{Binding Path=[5]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplateData}" Click="MessageTemplateButton_Click" MouseRightButtonUp="MessageTemplateButton_RightClick"/>
+                        <Button Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" Content="{Binding Path=DisplayName}" d:Content="6" DataContext="{Binding Path=[6]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplateData}" Click="MessageTemplateButton_Click" MouseRightButtonUp="MessageTemplateButton_RightClick"/>
+                        <Button Grid.Row="1" Grid.Column="3" Margin="0,0,5,0" Content="{Binding Path=DisplayName}" d:Content="7" DataContext="{Binding Path=[7]}" d:DataContext="{d:DesignInstance Type=dc:MessageTemplateData}" Click="MessageTemplateButton_Click" MouseRightButtonUp="MessageTemplateButton_RightClick"/>
                     </Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>

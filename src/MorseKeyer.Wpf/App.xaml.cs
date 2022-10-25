@@ -19,10 +19,7 @@ namespace MorseKeyer.Wpf
         /// <param name="e">The event data.</param>
         private void ApplicationStartup(object sender, StartupEventArgs e)
         {
-            var window = new MainWindow
-            {
-                DataContext = new MainViewModel(),
-            };
+            var window = new MainWindow();
             window.Show();
         }
     }

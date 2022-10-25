@@ -26,7 +26,7 @@ namespace MorseKeyer.Configuration.Test
         public void TestConstructor()
         {
             var config = new Config();
-            config.ConfigData.Should().NotBeNull();
+            config.Should().NotBeNull();
         }
 
         /// <summary>
@@ -50,14 +50,14 @@ namespace MorseKeyer.Configuration.Test
             "));
 
             var config = new Config(fileSystem);
-            config.Load(TestConfigFilename);
+            var configData = config.Load(TestConfigFilename);
 
-            config.ConfigData.MyCallsign.Should().Be("BA1ZZZ");
-            config.ConfigData.Gain.Should().BeApproximately(0.9f, 1e-6f);
-            config.ConfigData.Frequency.Should().Be(300);
-            config.ConfigData.Wpm.Should().Be(20);
+            configData.MyCallsign.Should().Be("BA1ZZZ");
+            configData.Gain.Should().BeApproximately(0.9f, 1e-6f);
+            configData.Frequency.Should().Be(300);
+            configData.Wpm.Should().Be(20);
 
-            var messageTemplates = config.ConfigData.MessageTemplates;
+            var messageTemplates = configData.MessageTemplates;
             messageTemplates.Should().HaveCount(8);
             messageTemplates.Should().ContainInOrder(new MessageTemplateData[8]
             {
@@ -80,8 +80,8 @@ namespace MorseKeyer.Configuration.Test
         {
             var fileSystem = new MockFileSystem();
             var config = new Config(fileSystem);
-            config.Load(TestConfigFilename);
-            config.ConfigData.Should().Be(new ConfigData());
+            var configData = config.Load(TestConfigFilename);
+            configData.Should().Be(new ConfigData());
         }
 
         /// <summary>
@@ -97,12 +97,12 @@ namespace MorseKeyer.Configuration.Test
             fileSystem.AddFile(TestConfigFilename, new MockFileData(jsonContent));
 
             var config = new Config(fileSystem);
-            config.Load(TestConfigFilename);
-            config.ConfigData.Should().Be(new ConfigData());
+            var configData = config.Load(TestConfigFilename);
+            configData.Should().Be(new ConfigData());
         }
 
         /// <summary>
-        /// Tests <see cref="Config.Save(string)"/>.
+        /// Tests <see cref="Config.Save(ConfigData, string)"/>.
         /// </summary>
         [TestMethod]
         public void TestSave()
@@ -110,16 +110,17 @@ namespace MorseKeyer.Configuration.Test
             var fileSystem = new MockFileSystem();
 
             var config = new Config(fileSystem);
-            config.ConfigData.MyCallsign = "BA1ZZZ";
-            config.Save(TestConfigFilename);
+            var configData = new ConfigData();
+            configData.MyCallsign = "BA1ZZZ";
+            config.Save(configData, TestConfigFilename);
 
             fileSystem.FileExists(TestConfigFilename).Should().BeTrue();
             ConfigData result = JsonSerializer.Deserialize<ConfigData>(fileSystem.File.ReadAllText(TestConfigFilename))!;
-            result.Should().BeEquivalentTo(config.ConfigData);
+            result.Should().BeEquivalentTo(configData);
         }
 
         /// <summary>
-        /// Tests <see cref="Config.Save(string)"/> when it fails to save.
+        /// Tests <see cref="Config.Save(ConfigData, string)"/> when it fails to save.
         /// </summary>
         [TestMethod]
         public void TestSaveFailed()
@@ -129,7 +130,7 @@ namespace MorseKeyer.Configuration.Test
             fileSystem.File.SetAttributes(TestConfigFilename, FileAttributes.ReadOnly);
 
             var config = new Config(fileSystem);
-            config.Save(TestConfigFilename);
+            config.Save(new(), TestConfigFilename);
 
             fileSystem.File.ReadAllText(TestConfigFilename).Should().BeEmpty();
         }

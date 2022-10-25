@@ -21,8 +21,6 @@ namespace MorseKeyer.Configuration
 
         private readonly IFileSystem fileSystem;
 
-        private ConfigData configData;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Config"/> class.
         /// </summary>
@@ -38,31 +36,25 @@ namespace MorseKeyer.Configuration
         public Config(IFileSystem fileSystem)
         {
             this.fileSystem = fileSystem;
-            this.configData = new();
         }
-
-        /// <summary>
-        /// Gets the configuration data.
-        /// </summary>
-        public ConfigData ConfigData => this.configData;
 
         /// <summary>
         /// Loads config from a file.
         /// </summary>
         /// <param name="filename">The filename of the config.</param>
-        public void Load(string filename = ConfigFilename)
+        /// <returns>The loaded config.</returns>
+        public ConfigData Load(string filename = ConfigFilename)
         {
             if (!this.fileSystem.File.Exists(filename))
             {
                 // Use default config.
-                this.configData = new();
-                return;
+                return new();
             }
 
             try
             {
                 using Stream jsonStream = this.fileSystem.File.Open(filename, FileMode.Open, FileAccess.Read);
-                this.configData = JsonSerializer.Deserialize<ConfigData>(jsonStream, new JsonSerializerOptions
+                return JsonSerializer.Deserialize<ConfigData>(jsonStream, new JsonSerializerOptions
                 {
                     AllowTrailingCommas = true,
                     IgnoreReadOnlyProperties = true,
@@ -71,20 +63,21 @@ namespace MorseKeyer.Configuration
             catch (Exception e) when (e is JsonException || e is IOException || e is FileNotFoundException)
             {
                 // Use default config.
-                this.configData = new();
+                return new();
             }
         }
 
         /// <summary>
         /// Saves config to a file.
         /// </summary>
+        /// <param name="configData">The config to save.</param>
         /// <param name="filename">The filename of the config.</param>
-        public void Save(string filename = ConfigFilename)
+        public void Save(ConfigData configData, string filename = ConfigFilename)
         {
             try
             {
                 using Stream jsonStream = this.fileSystem.File.Open(filename, FileMode.Create, FileAccess.Write);
-                JsonSerializer.Serialize(jsonStream, this.configData, new JsonSerializerOptions
+                JsonSerializer.Serialize(jsonStream, configData, new JsonSerializerOptions
                 {
                     WriteIndented = true,
                     AllowTrailingCommas = false,
