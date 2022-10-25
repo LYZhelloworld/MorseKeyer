@@ -6,11 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <Version>1.2.1</Version>
-    <Company>Helloworld</Company>
-    <PackageProjectUrl>https://github.com/LYZhelloworld/MorseKeyer</PackageProjectUrl>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Copyright>Licensed under the MIT license.</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <AssemblyName>$(SolutionName)</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
