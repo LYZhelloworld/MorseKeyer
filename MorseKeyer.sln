@@ -36,9 +36,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseKeyer.Resources", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseKeyer.Wpf.FunctionalTest", "test\MorseKeyer.Wpf.FunctionalTest\MorseKeyer.Wpf.FunctionalTest.csproj", "{7B959A69-F71A-4CA2-AC4E-062D57B60E9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorseKeyer.Configuration", "src\MorseKeyer.Configuration\MorseKeyer.Configuration.csproj", "{ECD812DF-016B-4934-9F27-B086E48C15E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseKeyer.Configuration", "src\MorseKeyer.Configuration\MorseKeyer.Configuration.csproj", "{ECD812DF-016B-4934-9F27-B086E48C15E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorseKeyer.Configuration.Test", "test\MorseKeyer.Configuration.Test\MorseKeyer.Configuration.Test.csproj", "{DAE909AB-EFFB-42A1-885F-9B2E2BD2567C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorseKeyer.Configuration.Test", "test\MorseKeyer.Configuration.Test\MorseKeyer.Configuration.Test.csproj", "{DAE909AB-EFFB-42A1-885F-9B2E2BD2567C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
